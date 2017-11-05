@@ -12,6 +12,7 @@ ApplicationWindow {
 
     SwipeView {                                 //odpowiada za przesuwanie stron;
         id: swipeView
+        interactive: false                      //wyłącza funkcje przesuwania strony palce;
         anchors.fill: parent                    //ustawia wymiary okna do wymiarów ustalonych wyżej;
         currentIndex: tabBar.currentIndex
 
@@ -21,6 +22,31 @@ ApplicationWindow {
         Page{                                   //stona druga. Na niej będie wyświetlana siatka automatu;
             property alias second: second       //jest to alias który pozwala na odwoływanie się do tego elementu w innych częściach programu;
             id: second
+            PinchArea {
+                id: pinch
+                width: second.width
+                height: second.height
+                pinch.target: second
+                pinch.minimumScale: 1
+                pinch.maximumScale: 10
+                pinch.dragAxis: Pinch.XAndYAxis
+                onPinchStarted: {               //jeszcze nie wiem ja to dokładnie działa, więc zostawiam te komentarze które są;
+                    initialWidth = second.contentWidth
+                    initialHeight = second.contentHeight
+                }
+                onPinchUpdated: {
+                    // adjust content pos due to drag
+                    second.contentX += pinch.previousCenter.x - pinch.center.x
+                    second.contentY += pinch.previousCenter.y - pinch.center.y
+
+                    // resize content
+                    second.resizeContent(initialWidth * pinch.scale, initialHeight * pinch.scale, pinch.center)
+                }
+                onPinchFinished: {
+                    // Move its content within bounds.
+                    second.returnToBounds()
+                }
+            }
         }
     }
 

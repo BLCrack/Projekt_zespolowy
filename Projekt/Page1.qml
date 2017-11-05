@@ -12,6 +12,17 @@ Page1Form {
         height =Screen.height;                              //tutaj ustawiam wysokość pojedyńczej komórki. Ta wartość 100 jest odejmowana ponieważ
         height=height-100;                                  //nie mogę na razie pograć wysokości stópki programu i gdzyby nie ona to funkcja rysowała by
         height = height/a;                                  //komórki pod przyciskami stron;
+        var background = Qt.createQmlObject(                //tworz białe tło na którym jest wyświetlana siatka;
+                    'import QtQuick 2.0;
+                    import QtQuick.Window 2.2
+                    Rectangle {
+                        x: 0
+                        y: 0
+                        width: Screen.width
+                        height: Screen.height
+                        border.width: 0
+                        color: "white"
+                    }',second,"rysowanie");
         for(var i=0; i<a; i++){                             //pętle do rysowania
             for(var j=0; j<a; j++){
 //wole ten komentarz wstawić tutaj aby przypadkie nie popsuć tego niżej. Zmienna na dole jest odpowiedzialna za stworzenie
@@ -36,6 +47,7 @@ Page1Form {
                                     font.pointSize: 12
                                 }
                             }',second,"rysowanie");
+
                 x+=width;                                   //przesuwamy x o szerokość komórki;
                 counter++;                                  //zwiększamy licznik;
             }
@@ -47,12 +59,12 @@ Page1Form {
     button1.onClicked: {                                    //event opisujący kliknięcie przycisku;
         draw(textField1.text);
     }
-//tutaj staram się coś zrobić z błędnie rysowaną siatką gdy obruci się ekran po narysowaniu czegoś. Narazie w fazie testowej. Do przerobienia;
     onHeightChanged: {
         draw(textField1.text);
     }
     onWidthChanged: {
         draw(textField1.text);
     }
+
 }
 
