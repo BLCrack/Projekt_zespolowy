@@ -1,9 +1,13 @@
-<!DOCTYPE RCC>
-<RCC version="1.0">
+<RCC>
     <qresource prefix="/">
         <file>main.qml</file>
         <file>Page1.qml</file>
         <file>Page1Form.ui.qml</file>
         <file>qtquickcontrols2.conf</file>
+        <file>glowny.qml</file>
+        <file>Strona_startowa.qml</file>
+        <file>Strona_startowaForm.ui.qml</file>
+        <file>Wprowadz_dane.qml</file>
+        <file>Wprowadz_daneForm.ui.qml</file>
     </qresource>
 </RCC>

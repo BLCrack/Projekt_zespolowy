@@ -1,26 +1,60 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
+import QtQuick.Window 2.2
 
-Item {
-    property alias textField1: textField1                   //ustawienie aliasów dla korzystania z tych elementów w
-    property alias button1: button1                         //innych częściach programu;
-    property alias item1: item1
-
-    id:item1
+ColumnLayout {
+    property alias ustaw: ustaw
+    id:ustaw
+    width: Screen.width
+    height: Screen.height
 
     RowLayout {
+        id: rowLayout
+        width: Screen.width/3
+        height: Screen.height/3
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: 20
-        anchors.top: parent.top
-
-        TextField {                                         //miejsce do wpisywania tekstu;
-            id: textField1
-            placeholderText: qsTr("Podaj wymiar tablicy")
+        anchors.topMargin: 50
+        TextField {
+            id: textField
+            placeholderText: qsTr("Tekst do wyświetlenia")
         }
 
-        Button {                                            //przycisk;
+        Button {
+            id: button
+            text: qsTr("Potwierdz")
+        }
+    }
+
+    RowLayout {
+        id: rowLayout1
+        width: Screen.width/3
+        height: Screen.height/3
+        anchors.horizontalCenter: parent.horizontalCenter
+        TextField {
+            id: textField1
+            placeholderText: qsTr("Grubość obramowania, np. 4")
+        }
+
+        Button {
             id: button1
+            text: qsTr("Potwierdz")
+        }
+    }
+
+    RowLayout {
+        id: rowLayout2
+        width: Screen.width/3
+        height: Screen.height/3
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottomMargin: 60
+        TextField {
+            id: textField2
+            placeholderText: qsTr("Kolor, np. red")
+        }
+
+        Button {
+            id: button2
             text: qsTr("Potwierdz")
         }
     }
