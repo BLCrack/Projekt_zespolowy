@@ -38,34 +38,37 @@ Page {
 
         Page{                                   //stona druga. Na niej będie wyświetlana siatka automatu;
             property alias second: second       //jest to alias który pozwala na odwoływanie się do tego elementu w innych częściach programu;
-            property alias pinch: pinch
+            property alias pincha: pincha
+            property alias flick: flick
             id: second
-            PinchArea {                         //odpowiada za przypliżanie przy pomocy palcy
-                id: pinch
+            Flickable{                          //opakowanie pomocnicze do przybliżania siatki
+                id:flick
+                anchors.fill: parent
                 width: second.width
                 height: second.height
-                pinch.target: second
-                pinch.minimumScale: 1
-                pinch.maximumScale: 10
-                onPinchStarted: {               //jeszcze nie wiem ja to dokładnie działa, więc zostawiam te komentarze które są;
-                    initialWidth = second.contentWidth
-                    initialHeight = second.contentHeight
-                }
-                onPinchUpdated: {
-                    // adjust content pos due to drag
-                    second.contentX += pinch.previousCenter.x - pinch.center.x
-                    second.contentY += pinch.previousCenter.y - pinch.center.y
+                interactive: false
+                PinchArea {                     //odpowiada za przypliżanie przy pomocy palcy
+                    id: pincha
+                    width: flick.width
+                    height: flick.height
+                    pinch.target: flick
+                    pinch.minimumScale: 1
+                    pinch.maximumScale: 10
+                    property real initialWidth
+                    property real initialHeight
+                    onPinchStarted: {           //pobiera wartości wielkości okna w obecnej skali
+                        initialWidth = flick.contentWidth
+                        initialHeight = flick.contentHeight
+                    }
 
-                    // resize content
-                    second.resizeContent(initialWidth * pinch.scale, initialHeight * pinch.scale, pinch.center)
-                }
-                onPinchFinished: {
-                    // Move its content within bounds.
-                    second.returnToBounds()
+                    onPinchUpdated: {           //pozwala na przesuwanie siatki przy użyciu dwóch palców
+                        flick.contentX += pinch.previousCenter.x - pinch.center.x
+                        flick.contentY += pinch.previousCenter.y - pinch.center.y
+                    }
                 }
             }
         }
-        Page1{                                  //trzecia strona. Na niej są wyświetlane stawienia komórki
+        Page1{                                  //trzecia strona. Na niej są wyświetlane ustawienia komórki
         }
     }
 
@@ -75,14 +78,17 @@ Page {
         TabButton {
             text: qsTr("First")
             height: 40
+            onClicked: {flick.returnToBounds();pincha.visible=false}
         }
         TabButton {
             text: qsTr("Second")
             height: 40
+            onClicked: pincha.visible=true
         }
         TabButton {
             text: qsTr("Third")
             height: 40
+            onClicked: {flick.returnToBounds();pincha.visible=false}
         }
     }
 }

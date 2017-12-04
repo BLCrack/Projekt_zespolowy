@@ -6,12 +6,14 @@ Wprowadz_daneForm {
     //poniżej znajduje się funkcja która jest odpowiedzialna za dynamiczne rysowanie komórek. Parametr który pobiera to tekst wpisany przez użytkownika.
     //gdy podamy coś innego niż liczbę funkcja nic nie robi;
         function draw(a) {
-            var x=0,y=40,counter=1, width=0, height=0;           //zmienne. Mam nadzieje że nazwy są wystarczająco jasne;
+            var x=0,y=40,counter=1, size=0;                     //zmienne. Mam nadzieje że nazwy są wystarczająco jasne;
             a = parseInt(a);                                    //tutaj funkcja przekształca podany tekst na liczbę;
-            width = Screen.width/a;                             //tutaj ustawiam szerokość pojedyńczej komórki;
-            height =Screen.height;                              //tutaj ustawiam wysokość pojedyńczej komórki. Ta wartość 100 jest odejmowana ponieważ
-            height=height-140;                                  //nie mogę na razie pograć wysokości stópki programu i gdzyby nie ona to funkcja rysowała by
-            height = height/a;                                  //komórki pod przyciskami stron;
+            if(Screen.width<Screen.height)                      //tutaj ustawiam rozmiar komórki
+                size=Screen.width/a
+            else{
+                size =Screen.height;
+                size=(size-140)/a;
+            }
             var background = Qt.createQmlObject(                //tworz białe tło na którym jest wyświetlana siatka;
                         'import QtQuick 2.0;
                         import QtQuick.Window 2.2
@@ -22,7 +24,7 @@ Wprowadz_daneForm {
                             height: Screen.height
                             border.width: 0
                             color: "white"
-                        }',pinch,"rysowanie");
+                        }',pincha,"rysowanie");
             for(var i=0; i<a; i++){                             //pętle do rysowania
                 for(var j=0; j<a; j++){
     //wole ten komentarz wstawić tutaj aby przypadkie nie popsuć tego niżej. Zmienna na dole jest odpowiedzialna za stworzenie
@@ -37,8 +39,8 @@ Wprowadz_daneForm {
                                     id: k
                                     x: '+x+'
                                     y: '+y+'
-                                    width: '+width+'
-                                    height: '+height+'
+                                    width: '+size+'
+                                    height: '+size+'
                                     border.width: 1
                                     Text {
                                         text: "'+counter+'"
@@ -53,12 +55,12 @@ Wprowadz_daneForm {
                                         }
                                     }
 
-                                }',pinch,"rysowanie");
+                                }',pincha,"rysowanie");
 
-                    x+=width;                                   //przesuwamy x o szerokość komórki;
+                    x+=size;                                   //przesuwamy x o szerokość komórki;
                     counter++;                                  //zwiększamy licznik;
                 }
-                y+=height;                                      //przesuwamy y o wysokość komórki;
+                y+=size;                                      //przesuwamy y o wysokość komórki;
                 x=0;                                            //ustawiamy x na początek;
             }
         }
