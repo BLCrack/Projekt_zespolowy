@@ -1,6 +1,7 @@
 import QtQuick 2.4
 import QtQuick.Window 2.2
 import QtQuick.Controls 1.4
+import "automatkomorkowy.js" as Logika
 
 Wprowadz_daneForm {
     //poniżej znajduje się funkcja która jest odpowiedzialna za dynamiczne rysowanie komórek. Parametr który pobiera to tekst wpisany przez użytkownika.
@@ -63,8 +64,11 @@ Wprowadz_daneForm {
                 y+=size;                                      //przesuwamy y o wysokość komórki;
                 x=0;                                            //ustawiamy x na początek;
             }
+            //tutaj tworzone są obiekty JavaScriptowe
+            var automat = new Logika.CellularAutomation(a); //tworzenie obiektu automatu o rozmiarze a
+            automat.initialize();                           //w tym przypadku losujemy wartosci wektora komorek RGB
+            var temp = automat.map[0][0].values[0]; //taki przyklad - jest to pierwsza wartosc wektora pierwszej komórki z lewgo gornego rogu
         }
-
         rysuj.onClicked: {                                      //event opisujący kliknięcie przycisku;
             draw(textField.text);
         }
