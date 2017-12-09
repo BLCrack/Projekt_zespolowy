@@ -7,13 +7,35 @@ Wprowadz_daneForm {
     //poniżej znajduje się funkcja która jest odpowiedzialna za dynamiczne rysowanie komórek. Parametr który pobiera to tekst wpisany przez użytkownika.
     //gdy podamy coś innego niż liczbę funkcja nic nie robi;
         function draw(a) {
-            var x=0,y=40,counter=1, size=0;                     //zmienne. Mam nadzieje że nazwy są wystarczająco jasne;
+            var x=0,y=40,counter=1, size=0, font=12, border=0;                     //zmienne. Mam nadzieje że nazwy są wystarczająco jasne;
             a = parseInt(a);                                    //tutaj funkcja przekształca podany tekst na liczbę;
+
+            var automat = new Logika.CellularAutomation(a); //tworzenie obiektu automatu o rozmiarze a
+            automat.initialize();                           //w tym przypadku losujemy wartosci wektora komorek RGB
+
             if(Screen.width<Screen.height)                      //tutaj ustawiam rozmiar komórki
                 size=Screen.width/a
             else{
                 size =Screen.height;
                 size=(size-140)/a;
+            }
+            if(a>14&&a<23)
+                font-=2;
+            else{
+                if(a>22 && a<31)
+                    font-=4;
+                else{
+                    if(a>30&&a<39)
+                        font-=6;
+                    else{
+                        if(a>38&&a<47)
+                            font-=8;
+                        else{
+                            if(a>46)
+                                font-=10;
+                        }
+                    }
+                }
             }
             var background = Qt.createQmlObject(                //tworz białe tło na którym jest wyświetlana siatka;
                         'import QtQuick 2.0;
@@ -42,17 +64,18 @@ Wprowadz_daneForm {
                                     y: '+y+'
                                     width: '+size+'
                                     height: '+size+'
-                                    border.width: 1
+                                    border.width: '+border+'
+                                    color: Qt.rgba('+automat.map[i][j].values[0]+','+automat.map[i][j].values[1]+','+automat.map[i][j].values[2]+')
                                     Text {
-                                        text: "'+counter+'"
+                                        text: "'+automat.map[i][j].cellularID+'"
                                         anchors.horizontalCenter: parent.horizontalCenter
                                         anchors.verticalCenter: parent.verticalCenter
-                                        font.pointSize: 12
+                                        font.pointSize: '+font+'
                                     }
                                     MouseArea {
                                         anchors.fill: k
                                         onClicked: {
-                                            k.color="#ff0000"
+                                            k.color="#FFFFFF"
                                         }
                                     }
 
@@ -64,11 +87,8 @@ Wprowadz_daneForm {
                 y+=size;                                      //przesuwamy y o wysokość komórki;
                 x=0;                                            //ustawiamy x na początek;
             }
-            //tutaj tworzone są obiekty JavaScriptowe
-            var automat = new Logika.CellularAutomation(a); //tworzenie obiektu automatu o rozmiarze a
-            automat.initialize();                           //w tym przypadku losujemy wartosci wektora komorek RGB
-            var temp = automat.map[0][0].values[0]; //taki przyklad - jest to pierwsza wartosc wektora pierwszej komórki z lewgo gornego rogu
         }
+
         rysuj.onClicked: {                                      //event opisujący kliknięcie przycisku;
             draw(textField.text);
         }

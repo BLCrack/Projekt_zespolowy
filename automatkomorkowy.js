@@ -27,21 +27,21 @@ CellularAutomation.prototype.initialize = function()
             if(rand<5)
             {
                 isLive = false; //nie zywa
-                r=255.0;
+                r=0.0;
                 g=0.0;
                 b=0.0;
             }
             else
             {
                 isLive = true; //zywa
-                r = 0.0;
-                g = 255.0;
-                b = 0.0;
+                r = Math.random();
+                g = Math.random();
+                b = Math.random();
             }
             //losujemy wartosci komorek
             var tabOfValues = new Array(r,g,b); //randomowe wartosci rgb do dla komórki
             this.map[height][width] = new Cellular(index, height, width,3, tabOfValues) //true or false zaleznie czy zyje czy nie
-            index++;
+            index++;     
         }
     }
 

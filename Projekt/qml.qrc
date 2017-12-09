@@ -9,5 +9,7 @@
         <file>Strona_startowaForm.ui.qml</file>
         <file>Wprowadz_dane.qml</file>
         <file>Wprowadz_daneForm.ui.qml</file>
+        <file>automatkomorkowy.js</file>
+        <file>skrypt.js</file>
     </qresource>
 </RCC>
