@@ -40,6 +40,7 @@ Page {
             property alias second: second       //jest to alias który pozwala na odwoływanie się do tego elementu w innych częściach programu;
             property alias pincha: pincha
             property alias flick: flick
+            property alias opiskomorki: opiskomorki
             id: second
             Flickable{                          //opakowanie pomocnicze do przybliżania siatki
                 id:flick
@@ -65,6 +66,13 @@ Page {
                         flick.contentX += pinch.previousCenter.x - pinch.center.x
                         flick.contentY += pinch.previousCenter.y - pinch.center.y
                     }
+                }
+                Text {
+                    id:opiskomorki
+                    x: 20
+                    y: Screen.height-80
+                    width: Screen.width
+                    font.pointSize: 10
                 }
             }
         }

@@ -58,8 +58,8 @@ Wprowadz_daneForm {
                     var newObject = Qt.createQmlObject(
                                 'import QtQuick 2.0;
                                 Rectangle {
-                                    property alias k: k
-                                    id: k
+                                    property alias k'+automat.map[i][j].cellularID+': k'+automat.map[i][j].cellularID+'
+                                    id: k'+automat.map[i][j].cellularID+'
                                     x: '+x+'
                                     y: '+y+'
                                     width: '+size+'
@@ -73,9 +73,9 @@ Wprowadz_daneForm {
                                         font.pointSize: '+font+'
                                     }
                                     MouseArea {
-                                        anchors.fill: k
+                                        anchors.fill: k'+automat.map[i][j].cellularID+'
                                         onClicked: {
-                                            k.color="#FFFFFF"
+                                            opiskomorki.text="Kliknięto komórkę z ID: '+automat.map[i][j].cellularID+' [kolumna: '+(automat.map[i][j].widthPosition+1)+', wiersz: '+(automat.map[i][j].heightPosition+1)+'], Color (R: '+automat.map[i][j].values[0]+', G: '+automat.map[i][j].values[1]+', B: '+automat.map[i][j].values[2]+'),\nIlość wartości komórki: '+automat.map[i][j].countOfValues+', Wartości: '+automat.map[i][j].values[0]+','+automat.map[i][j].values[1]+','+automat.map[i][j].values[2]+'"
                                         }
                                     }
 
