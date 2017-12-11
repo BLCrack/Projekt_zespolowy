@@ -7,11 +7,15 @@ Wprowadz_daneForm {
     //poniżej znajduje się funkcja która jest odpowiedzialna za dynamiczne rysowanie komórek. Parametr który pobiera to tekst wpisany przez użytkownika.
     //gdy podamy coś innego niż liczbę funkcja nic nie robi;
         function draw(a) {
-            var x=0,y=40,counter=1, size=0, font=12, border=0;                     //zmienne. Mam nadzieje że nazwy są wystarczająco jasne;
+            var x=0,y=40, size=0, font=12, border=0;                     //zmienne. Mam nadzieje że nazwy są wystarczająco jasne;
             a = parseInt(a);                                    //tutaj funkcja przekształca podany tekst na liczbę;
 
-            var automat = new Logika.CellularAutomation(a); //tworzenie obiektu automatu o rozmiarze a
-            automat.initialize();                           //w tym przypadku losujemy wartosci wektora komorek RGB
+            automatGlobal=new Logika.CellularAutomation(a);
+            automatGlobal.initialize();
+
+            if(pincha.children!=null)
+                for(var k=pincha.children.length; k>0;k--)
+                    pincha.children[k-1].destroy();
 
             if(Screen.width<Screen.height)                      //tutaj ustawiam rozmiar komórki
                 size=Screen.width/a
@@ -37,17 +41,6 @@ Wprowadz_daneForm {
                     }
                 }
             }
-            var background = Qt.createQmlObject(                //tworz białe tło na którym jest wyświetlana siatka;
-                        'import QtQuick 2.0;
-                        import QtQuick.Window 2.2
-                        Rectangle {
-                            x: 0
-                            y: 0
-                            width: Screen.width
-                            height: Screen.height
-                            border.width: 0
-                            color: "white"
-                        }',pincha,"rysowanie");
             for(var i=0; i<a; i++){                             //pętle do rysowania
                 for(var j=0; j<a; j++){
     //wole ten komentarz wstawić tutaj aby przypadkie nie popsuć tego niżej. Zmienna na dole jest odpowiedzialna za stworzenie
@@ -56,46 +49,39 @@ Wprowadz_daneForm {
     //naszej drugiej strony. Informacja na koniec to nazwa wyśietlana w debuggerze gdy wystąpi jakiś błąd podczas tworzenia
     //komórki;
                     var newObject = Qt.createQmlObject(
-                                'import QtQuick 2.0;
+                                'import QtQuick 2.0
+                                import "automatkomorkowy.js" as Logika
                                 Rectangle {
-                                    property alias k'+automat.map[i][j].cellularID+': k'+automat.map[i][j].cellularID+'
-                                    id: k'+automat.map[i][j].cellularID+'
+                                    id: k'+automatGlobal.map[i][j].cellularID+'
                                     x: '+x+'
                                     y: '+y+'
                                     width: '+size+'
                                     height: '+size+'
                                     border.width: '+border+'
-                                    color: Qt.rgba('+automat.map[i][j].values[0]+','+automat.map[i][j].values[1]+','+automat.map[i][j].values[2]+')
+                                    color: Qt.rgba('+automatGlobal.map[i][j].values[0]+','+automatGlobal.map[i][j].values[1]+','+automatGlobal.map[i][j].values[2]+')
                                     Text {
-                                        text: "'+automat.map[i][j].cellularID+'"
+                                        id: znak
+                                        text: "'+automatGlobal.map[i][j].cellularID+'"
                                         anchors.horizontalCenter: parent.horizontalCenter
                                         anchors.verticalCenter: parent.verticalCenter
                                         font.pointSize: '+font+'
                                     }
                                     MouseArea {
-                                        anchors.fill: k'+automat.map[i][j].cellularID+'
+                                        anchors.fill: k'+automatGlobal.map[i][j].cellularID+'
                                         onClicked: {
-                                            opiskomorki.text="Kliknięto komórkę z ID: '+automat.map[i][j].cellularID+' [kolumna: '+(automat.map[i][j].widthPosition+1)+', wiersz: '+(automat.map[i][j].heightPosition+1)+'], Color (R: '+automat.map[i][j].values[0]+', G: '+automat.map[i][j].values[1]+', B: '+automat.map[i][j].values[2]+'),\nIlość wartości komórki: '+automat.map[i][j].countOfValues+', Wartości: '+automat.map[i][j].values[0]+','+automat.map[i][j].values[1]+','+automat.map[i][j].values[2]+'"
+                                            opiskomorki.text="Kliknięto komórkę z ID: "+automatGlobal.map['+i+']['+j+'].cellularID+" [kolumna: "+(automatGlobal.map['+i+']['+j+'].widthPosition+1)+", wiersz: "+(automatGlobal.map['+i+']['+j+'].heightPosition+1)+"], Color (R: "+automatGlobal.map['+i+']['+j+'].values[0]+", G: "+automatGlobal.map['+i+']['+j+'].values[1]+", B: "+automatGlobal.map['+i+']['+j+'].values[2]+"), Ilość wartości komórki: "+automatGlobal.map['+i+']['+j+'].countOfValues+", Wartości: "+automatGlobal.map['+i+']['+j+'].values[0]+","+automatGlobal.map['+i+']['+j+'].values[1]+","+automatGlobal.map['+i+']['+j+'].values[2]+""
                                         }
                                     }
 
                                 }',pincha,"rysowanie");
 
                     x+=size;                                   //przesuwamy x o szerokość komórki;
-                    counter++;                                  //zwiększamy licznik;
                 }
                 y+=size;                                      //przesuwamy y o wysokość komórki;
                 x=0;                                            //ustawiamy x na początek;
             }
         }
-
         rysuj.onClicked: {                                      //event opisujący kliknięcie przycisku;
-            draw(textField.text);
-        }
-        onHeightChanged: {
-            draw(textField.text);
-        }
-        onWidthChanged: {
             draw(textField.text);
         }
         menu.onClicked: {                                       //uruchomienie strony strtowej. Klawisz powrotu.
