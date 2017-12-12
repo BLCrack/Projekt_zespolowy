@@ -3,6 +3,8 @@ function CellularAutomation(size)
     this.size = size;
     this.countOfCellulars = size*size;
     this.map = new Array(size);
+    this.currentX = null;
+    this.currentY = null;
 
     //tablica dwuwymiarowa
     for(var i=0; i<this.size; i++)
@@ -14,6 +16,8 @@ function CellularAutomation(size)
 //NOWA GRA
 CellularAutomation.prototype.initialize = function()
 {
+    this.currentX = 0;
+    this.currentT = 0;
     //tworzenie komórek na planszy
     var index = 0;
     for(var height=0; height<this.size; height++)
@@ -23,13 +27,15 @@ CellularAutomation.prototype.initialize = function()
             //losujemy czy przy starcie bedzie martwa czy zywa
             var rand = Math.random()*10;
             var isLive;
-            var r,g,b;
+            var r,g,b,obramowanie;
+            var tekst = "";
             if(rand<5)
             {
                 isLive = false; //nie zywa
                 r=255.0;
                 g=0.0;
                 b=0.0;
+                obramowanie = 0.0;
             }
             else
             {
@@ -37,10 +43,11 @@ CellularAutomation.prototype.initialize = function()
                 r = 0.0;
                 g = 255.0;
                 b = 0.0;
+                obramowanie = 1.0;
             }
             //losujemy wartosci komorek
-            var tabOfValues = new Array(r,g,b); //randomowe wartosci rgb do dla komórki
-            this.map[height][width] = new Cellular(index, height, width,3, tabOfValues) //true or false zaleznie czy zyje czy nie
+            var tabOfValues = new Array(r,g,b,obramowanie,tekst); //randomowe wartosci rgb do dla komórki
+            this.map[height][width] = new Cellular(index, height, width,5, tabOfValues) //true or false zaleznie czy zyje czy nie
             index++;
         }
     }
