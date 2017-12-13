@@ -94,9 +94,13 @@ CellularAutomation.prototype.loadFromFile = function(fileUrl)
         return object;    // zwrocenie calego obiektu automatu
 };
 
-CellularAutomation.prototype.saveToFile = function()
+CellularAutomation.prototype.saveToFile = function(fileUrl, object)
 {
-
+    var request = new XMLHttpRequest();
+    request.open("PUT", fileUrl, false);
+    var json = JSON.stringify(object);
+    request.send(json);
+    return request.status;
 };
 
 function Cellular(ID, heightPosition, widthPosition, countOfValues, values)
