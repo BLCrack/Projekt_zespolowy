@@ -108,8 +108,13 @@ onWidthChanged: updateDraw()
             width: Screen.width/4
             height: 40
             onClicked: {
-                automatGlobal.map=Zycie.scriptNextStep(automatGlobal);
-                updateDraw();
+                var i=0;
+                while(i<5)
+                {
+                    automatGlobal.map=Zycie.scriptNextStep(automatGlobal);
+                    updateDraw();
+                    i++;
+                }
             }
         }
         TabButton {
@@ -123,6 +128,10 @@ onWidthChanged: updateDraw()
             x:Screen.width-Screen.width/4
             width: Screen.width/4
             height: 40
+            onClicked: {
+                automatGlobal.map=Zycie.scriptNextStep(automatGlobal);
+                updateDraw();
+            }
         }
     }
 
