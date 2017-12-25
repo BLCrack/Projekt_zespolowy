@@ -6,6 +6,7 @@ import "skrypt.js" as Zycie
 
 Page {
     property var automatGlobal
+    property var iteracja: 0
     property alias okno: okno
     property alias swipeView: swipeView
     id: okno
@@ -15,13 +16,15 @@ Page {
     visible: true
 
     function updateDraw(){
-        var counter=0, size=0, x=0, y=40;
+        var counter=0, size=0, x=0, y=0;
         if(Screen.width<Screen.height)                      //tutaj ustawiam rozmiar komórki
             size=Screen.width/automatGlobal.size
         else{
             size =Screen.height;
             size=(size-140)/automatGlobal.size;
         }
+        tlo.y=size*automatGlobal.size+1;
+        tlo.height=Screen.height-size*automatGlobal.size;
         for(var i=0; i<automatGlobal.size; i++){
             for(var j=0; j<automatGlobal.size; j++){
                 pincha.children[counter].x=x;
@@ -29,21 +32,25 @@ Page {
                 pincha.children[counter].width=size;
                 pincha.children[counter].height=size;
                 pincha.children[counter].color=Qt.rgba(automatGlobal.map[i][j].values[0],automatGlobal.map[i][j].values[1],automatGlobal.map[i][j].values[2]);
-                pincha.children[counter].children[0].text=automatGlobal.map[i][j].cellularID;
+                pincha.children[counter].border.width=automatGlobal.map[i][j].values[3];
+                pincha.children[counter].children[0].text=automatGlobal.map[i][j].values[4];
+                if(i==automatGlobal.currentX && j==automatGlobal.currentY)
+                    opiskomorki.text="ID komórki: "+automatGlobal.map[i][j].cellularID+"\nPołożenie: kolumna:"+(automatGlobal.map[i][j].widthPosition+1)+", wiersz:"+(automatGlobal.map[i][j].heightPosition+1)+"\nColor (R: "+automatGlobal.map[i][j].values[0]+", G: "+automatGlobal.map[i][j].values[1]+", B: "+automatGlobal.map[i][j].values[2]+")\nIlość wartości komórki: "+automatGlobal.map[i][j].countOfValues+"\nWartości: "+automatGlobal.map[i][j].values[0]+", "+automatGlobal.map[i][j].values[1]+", "+automatGlobal.map[i][j].values[2]+", "+automatGlobal.map[i][j].values[3]+", "+automatGlobal.map[i][j].values[4]+""
                 counter++;
                 x+=size;
             }
             y+=size;
             x=0;
         }
+        iter.text="Iteracja nr.: "+iteracja;
     }
 onHeightChanged: updateDraw()
 onWidthChanged: updateDraw()
     SwipeView {                                 //odpowiada za przesuwanie stron;
         id: swipeView
-        interactive: false                      //wyłącza funkcje przesuwania strony palce;
+        interactive: true                      //wyłącza funkcje przesuwania strony palce;
         anchors.fill: parent                    //ustawia wymiary okna do wymiarów ustalonych wyżej;
-        currentIndex: stopa.currentIndex
+        currentIndex: glowa.currentIndex
 
         Wprowadz_dane{                          //strona pierwsza. Jej wygląd i funkcje są opisane w Wprowadz_dane.qml i Wprowadz_daneForm.ui.qml;
         }
@@ -53,18 +60,21 @@ onWidthChanged: updateDraw()
             property alias pincha: pincha
             property alias flick: flick
             property alias opiskomorki: opiskomorki
+            property alias tlo: tlo
+            property alias iter: iter
+            property alias edytuj: edytuj
             id: second
             Flickable{                          //opakowanie pomocnicze do przybliżania siatki
                 id:flick
                 anchors.fill: parent
                 width: second.width
-                height: second.height
+                height: second.height-100
+                x: 0
+                y: 0
                 interactive: false
                 PinchArea {                     //odpowiada za przypliżanie przy pomocy palcy
-
                     id: pincha
-                    width: flick.width
-                    height: flick.height
+                    anchors.fill: parent
                     pinch.target: flick
                     pinch.minimumScale: 1
                     pinch.maximumScale: 10
@@ -81,21 +91,76 @@ onWidthChanged: updateDraw()
                     }
                 }
             }
-            Text {
-                id:opiskomorki
-                x: 8
-                y: Screen.height-80
+            Rectangle{
+                id: tlo
+                color: "white"
                 width: Screen.width
-                anchors.rightMargin: 8
-                font.pointSize: 10
-                wrapMode: Text.WordWrap
+                Text{
+                    id:opiskomorki
+                    x: 0
+                    width: Screen.width/2
+                    font.pointSize: 12
+                    wrapMode: Text.WordWrap
+                }
+                Text{
+                    id:iter
+                    x: Screen.width/2
+                    text: "Iteracja nr.: "+iteracja
+                    font.pointSize: 12
+                    wrapMode: Text.WordWrap
+                    Button{
+                        id: edytuj
+                        y:40
+                        text:"Edytuj komórkę"
+                        onClicked: swipeView.incrementCurrentIndex()
+                        enabled: swipeView.currentIndex < swipeView.count - 1
+                        height: 40
+                    }
+                }
             }
         }
         Page1{                                  //trzecia strona. Na niej są wyświetlane ustawienia komórki
+
         }
     }
-    header: Item {                              //nagłówek z przyciskami start i stop
+    header: TabBar {                            //jest to pasek narzędzi który wyświetla ilość stron w stópce programu
         id: glowa
+        currentIndex: swipeView.currentIndex
+        onCurrentIndexChanged: {
+            if (currentIndex==1 || currentIndex==3){
+                pincha.visible=true;
+                stopa.visible=true;
+                tlo.visible=true;
+            }
+            else{
+
+                flick.returnToBounds();
+                pincha.visible=false;
+                stopa.visible=false;
+                tlo.visible=false;
+            }
+        }
+
+        TabButton {
+            text: qsTr("First")
+            height: 40
+            onClicked: {flick.returnToBounds();pincha.visible=false;stopa.visible=false;tlo.visible=false;}
+        }
+        TabButton {
+            text: qsTr("Second")
+            height: 40
+            onClicked: {pincha.visible=true;stopa.visible=true;tlo.visible=true;}
+        }
+        TabButton {
+            id:edycjakomorki
+            text: qsTr("Third")
+            height: 40
+            onClicked: {flick.returnToBounds();pincha.visible=false;stopa.visible=false;tlo.visible=false;}
+        }
+    }
+    footer: TabBar {                              //nagłówek z przyciskami start i stop
+        id: stopa
+        visible: false
         TabButton {
             text: qsTr("Previous")
             x:0
@@ -112,8 +177,9 @@ onWidthChanged: updateDraw()
                 while(i<5)
                 {
                     automatGlobal.map=Zycie.scriptNextStep(automatGlobal);
-                    updateDraw();
                     i++;
+                    iteracja++;
+                    updateDraw();
                 }
             }
         }
@@ -130,28 +196,9 @@ onWidthChanged: updateDraw()
             height: 40
             onClicked: {
                 automatGlobal.map=Zycie.scriptNextStep(automatGlobal);
+                iteracja++;
                 updateDraw();
             }
-        }
-    }
-
-    footer: TabBar {                            //jest to pasek narzędzi który wyświetla ilość stron w stópce programu
-        id: stopa
-        currentIndex: swipeView.currentIndex
-        TabButton {
-            text: qsTr("First")
-            height: 40
-            onClicked: {flick.returnToBounds();pincha.visible=false}
-        }
-        TabButton {
-            text: qsTr("Second")
-            height: 40
-            onClicked: pincha.visible=true
-        }
-        TabButton {
-            text: qsTr("Third")
-            height: 40
-            onClicked: {flick.returnToBounds();pincha.visible=false}
         }
     }
 }

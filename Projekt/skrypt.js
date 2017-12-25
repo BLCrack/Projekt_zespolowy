@@ -44,6 +44,7 @@ function scriptNextStep(automat)	//gra o zycie
                     map_next[i][j].values[0]=0.0
                     map_next[i][j].values[1]=255.0
                     map_next[i][j].values[2]=0.0
+                    map_next[i][j].values[3]=1.0
                     //map_next[i][j].isLive = true;
                 }
             }
@@ -53,6 +54,7 @@ function scriptNextStep(automat)	//gra o zycie
                     map_next[i][j].values[0]=255.0
                     map_next[i][j].values[1]=0.0
                     map_next[i][j].values[2]=0.0
+                    map_next[i][j].values[3]=0.0
                     //map_next[i][j].isLive = false;
                 }
             }

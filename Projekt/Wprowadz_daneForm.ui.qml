@@ -66,6 +66,7 @@ Item {
             TextField {
                 id: skrypt
                 text: qsTr("")
+                inputMethodHints: Qt.ImhFormattedNumbersOnly
             }
 
             Button {
@@ -91,6 +92,7 @@ Item {
                 text: qsTr("")
                 Layout.fillWidth: false
                 Layout.fillHeight: false
+                inputMethodHints: Qt.ImhFormattedNumbersOnly
             }
 
             Button {
