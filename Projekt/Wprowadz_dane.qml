@@ -20,6 +20,7 @@ Wprowadz_daneForm {
             iteracja=0;
             opiskomorki.text=""
             edytuj.visible=false
+            iter.text="Iteracja nr.: "+iteracja;
 
             if(Screen.width<Screen.height)                      //tutaj ustawiam rozmiar komórki
                 size=Screen.width/a
@@ -90,8 +91,8 @@ Wprowadz_daneForm {
                 x=0;                                            //ustawiamy x na początek;
             }
         }
-        rysuj.onClicked: {                                      //event opisujący kliknięcie przycisku;
-            draw(textField.text);
+        potwierdz.onClicked: {                                      //event opisujący kliknięcie przycisku;
+            draw(wprowadz_liczbe.text);
         }
         menu.onClicked: {                                       //uruchomienie strony strtowej. Klawisz powrotu.
             okno.visible=false

@@ -10,15 +10,7 @@ Item {
     id: edycja
     width: 640
     height: 480
-    property alias text2: text2
-    property alias text3: text3
-    property alias wartosc_r: wartosc_r
-    property alias potwierdz_r: potwierdz_r
     property alias edycja: edycja
-    property alias wartosc_g: wartosc_g
-    property alias potwierdz_g: potwierdz_g
-    property alias wartosc_b: wartosc_b
-    property alias potwierdz_b: potwierdz_b
 
     Text {
         id: text1
@@ -35,199 +27,371 @@ Item {
         font.pixelSize: 33
     }
 
-    Grid {
-        id: grid
-        x: 146
-        width: 352
-        height: 368
-        anchors.verticalCenterOffset: 22
-        anchors.horizontalCenterOffset: 2
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.horizontalCenter: parent.horizontalCenter
+    Item {
+        id: item1
+        x: 91
+        width: 326
+        height: 389
         anchors.top: parent.top
-        anchors.topMargin: 78
+        anchors.topMargin: 91
+        anchors.horizontalCenter: parent.horizontalCenter
 
-        RowLayout {
-            id: blue
-            width: 282
-            height: 38
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.top
-            anchors.topMargin: 195
-
-            TextField {
-                id: wartosc_b
-                text: qsTr("")
-            }
-
-            Button {
-                id: potwierdz_b
-                text: qsTr("Potwierdź")
-            }
-        }
-
-        RowLayout {
-            id: green
-            width: 282
-            height: 38
-            anchors.horizontalCenterOffset: 0
-            anchors.top: parent.top
-            anchors.topMargin: 130
-            anchors.horizontalCenter: parent.horizontalCenter
-
-            TextField {
-                id: wartosc_g
-                text: qsTr("")
-            }
-
-            Button {
-                id: potwierdz_g
-                text: qsTr("Potwierdź")
-            }
-        }
-
-        RowLayout {
-
-            id: red
-            x: 37
-            width: 282
-            height: 38
-            anchors.horizontalCenterOffset: 0
-            anchors.top: parent.top
-            anchors.topMargin: 65
-            anchors.horizontalCenter: parent.horizontalCenter
-
-            TextField {
-                id: wartosc_r
-                width: 142
-                height: 38
-                text: qsTr("")
-                Layout.fillWidth: false
-                Layout.fillHeight: false
-            }
-
-            Button {
-                id: potwierdz_r
-                text: qsTr("Potwierdź")
-                Layout.fillWidth: false
-                Layout.fillHeight: false
-            }
-        }
-
-        Text {
-            id: text2
-            x: 37
-            width: 282
-            height: 38
-            text: qsTr("Zmień natężenie czerwieni:")
-            anchors.horizontalCenterOffset: 2
-            anchors.top: parent.top
-            anchors.topMargin: 35
-            anchors.horizontalCenter: parent.horizontalCenter
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-            font.pixelSize: 14
-        }
-
-        Text {
-            id: text3
-            width: 282
-            height: 38
-            text: qsTr("Zmień natężenie zieleni:")
-            anchors.horizontalCenterOffset: 2
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-            anchors.top: parent.top
-            anchors.topMargin: 102
-            anchors.horizontalCenter: parent.horizontalCenter
-            font.pixelSize: 14
-        }
-
-        Text {
-            id: text4
-            y: 169
-            width: 282
-            height: 38
-            text: qsTr("Zmień natężenie niebieskiego:")
-            anchors.horizontalCenterOffset: 2
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-            anchors.top: parent.top
-            anchors.topMargin: 165
-            anchors.horizontalCenter: parent.horizontalCenter
-            font.pixelSize: 14
-        }
-
-        RowLayout {
-            id: znak
-            y: 260
-            width: 282
-            height: 38
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.top
-            anchors.topMargin: 260
-
-            TextField {
-                id: wartosc_znak
-                width: 200
-                text: qsTr("")
-            }
-
-            Button {
-                id: potwierdz_znak
-                x: 206
-                width: 100
-                text: qsTr("Potwierdź")
-            }
-        }
-
-        Text {
-            id: text5
-            x: 37
-            y: 236
-            width: 282
-            height: 38
-            text: qsTr("Zmień Znak:")
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.top
-            anchors.topMargin: 228
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-            font.pixelSize: 14
-        }
-
-        Text {
-            id: text6
-            width: 282
-            height: 38
-            text: qsTr("Wybierz komórkę ")
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
+        Item {
+            id: item2
+            x: 0
+            width: 326
+            height: 40
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
             anchors.topMargin: 0
-            font.pixelSize: 17
+
+            Text {
+                id: text3
+                width: 155
+                height: 40
+                text: qsTr("Odpowiada za :")
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
+                anchors.left: parent.left
+                anchors.leftMargin: 85
+                anchors.top: parent.top
+                anchors.topMargin: 0
+                font.pixelSize: 15
+            }
+
+            Text {
+                id: text2
+                width: 85
+                height: 40
+                text: qsTr("Nr wartości")
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
+                anchors.left: parent.left
+                anchors.leftMargin: 0
+                anchors.top: parent.top
+                anchors.topMargin: 0
+                font.pixelSize: 16
+            }
+
+            Text {
+                id: text6
+                width: 86
+                height: 40
+                text: qsTr("Zmień")
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
+                anchors.left: parent.left
+                anchors.leftMargin: 240
+                anchors.top: parent.top
+                anchors.topMargin: 0
+                font.pixelSize: 15
+            }
+
         }
 
-        Text {
-            id: obramowanie
-            text: qsTr("Obramowanie:")
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
+        Item {
+            id: item3
+            x: 9
+            y: 0
+            width: 326
+            height: 40
+            anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
+            anchors.topMargin: 41
+            Text {
+                id: text4
+                width: 155
+                height: 40
+                text: qsTr("Natężenie czerwieni")
+                anchors.top: parent.top
+                font.pixelSize: 15
+                anchors.topMargin: 0
+                anchors.leftMargin: 85
+                horizontalAlignment: Text.AlignHCenter
+                anchors.left: parent.left
+                verticalAlignment: Text.AlignVCenter
+            }
+
+            Text {
+                id: text5
+                width: 85
+                height: 40
+                text: qsTr("1")
+                anchors.top: parent.top
+                font.pixelSize: 16
+                anchors.topMargin: 0
+                anchors.leftMargin: 0
+                horizontalAlignment: Text.AlignHCenter
+                anchors.left: parent.left
+                verticalAlignment: Text.AlignVCenter
+            }
+
+            TextField {
+                id: wart_czerw
+                x: 250
+                width: 86
+                text: qsTr("")
+                horizontalAlignment: Text.AlignHCenter
+                anchors.top: parent.top
+                anchors.topMargin: 0
+                anchors.leftMargin: 240
+                anchors.left: parent.left
+                inputMethodHints: Qt.ImhDigitsOnly
+            }
+        }
+
+        Item {
+            id: item4
+            x: 10
+            y: -5
+            width: 326
+            height: 40
+            anchors.top: parent.top
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.topMargin: 82
+            Text {
+                id: text7
+                width: 155
+                height: 40
+                text: qsTr("Natężenie zieleni")
+                anchors.top: parent.top
+                anchors.topMargin: 0
+                font.pixelSize: 15
+                horizontalAlignment: Text.AlignHCenter
+                anchors.leftMargin: 85
+                anchors.left: parent.left
+                verticalAlignment: Text.AlignVCenter
+            }
+
+            Text {
+                id: text8
+                width: 85
+                height: 40
+                text: qsTr("2")
+                anchors.top: parent.top
+                anchors.topMargin: 0
+                font.pixelSize: 16
+                horizontalAlignment: Text.AlignHCenter
+                anchors.leftMargin: 0
+                anchors.left: parent.left
+                verticalAlignment: Text.AlignVCenter
+            }
+
+            TextField {
+                id: wart_ziel
+                width: 86
+                text: qsTr("")
+                horizontalAlignment: Text.AlignHCenter
+                anchors.top: parent.top
+                anchors.topMargin: 0
+                anchors.leftMargin: 240
+                anchors.left: parent.left
+                inputMethodHints: Qt.ImhDigitsOnly
+            }
+        }
+
+        Item {
+            id: item5
+            x: 13
+            y: -12
+            width: 326
+            height: 40
+            anchors.top: parent.top
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.topMargin: 123
+            Text {
+                id: text9
+                width: 155
+                height: 40
+                text: qsTr("Natężenie niebieskiego")
+                anchors.top: parent.top
+                font.pixelSize: 15
+                anchors.topMargin: 0
+                anchors.leftMargin: 85
+                horizontalAlignment: Text.AlignHCenter
+                anchors.left: parent.left
+                verticalAlignment: Text.AlignVCenter
+            }
+
+            Text {
+                id: text10
+                width: 85
+                height: 40
+                text: qsTr("3")
+                anchors.top: parent.top
+                font.pixelSize: 16
+                anchors.topMargin: 0
+                anchors.leftMargin: 0
+                horizontalAlignment: Text.AlignHCenter
+                anchors.left: parent.left
+                verticalAlignment: Text.AlignVCenter
+            }
+
+            TextField {
+                id: wart_nieb
+                width: 86
+                text: qsTr("")
+                horizontalAlignment: Text.AlignHCenter
+                anchors.top: parent.top
+                anchors.topMargin: 0
+                anchors.leftMargin: 240
+                anchors.left: parent.left
+                inputMethodHints: Qt.ImhDigitsOnly
+            }
+        }
+
+        Item {
+            id: item6
+            x: 4
+            y: -12
+            width: 326
+            height: 40
+            anchors.top: parent.top
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.topMargin: 164
+            Text {
+                id: text11
+                width: 155
+                height: 40
+                text: qsTr("Wyświetlany tekst")
+                anchors.top: parent.top
+                anchors.topMargin: 0
+                font.pixelSize: 15
+                horizontalAlignment: Text.AlignHCenter
+                anchors.leftMargin: 85
+                anchors.left: parent.left
+                verticalAlignment: Text.AlignVCenter
+            }
+
+            Text {
+                id: text12
+                width: 85
+                height: 40
+                text: qsTr("4")
+                anchors.top: parent.top
+                anchors.topMargin: 0
+                font.pixelSize: 16
+                horizontalAlignment: Text.AlignHCenter
+                anchors.leftMargin: 0
+                anchors.left: parent.left
+                verticalAlignment: Text.AlignVCenter
+            }
+
+            TextField {
+                id: wart_tekst
+                width: 86
+                text: qsTr("")
+                horizontalAlignment: Text.AlignHCenter
+                anchors.top: parent.top
+                anchors.topMargin: 0
+                anchors.leftMargin: 240
+                anchors.left: parent.left
+            }
+        }
+
+        Item {
+            id: item7
+            x: 8
+            y: -2
+            width: 326
+            height: 40
+            anchors.top: parent.top
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.topMargin: 205
+            Text {
+                id: text13
+                width: 155
+                height: 40
+                text: qsTr("Obramowanie")
+                anchors.top: parent.top
+                font.pixelSize: 15
+                anchors.topMargin: 0
+                anchors.leftMargin: 85
+                horizontalAlignment: Text.AlignHCenter
+                anchors.left: parent.left
+                verticalAlignment: Text.AlignVCenter
+            }
+
+            Text {
+                id: text14
+                width: 85
+                height: 40
+                text: qsTr("5")
+                anchors.top: parent.top
+                font.pixelSize: 16
+                anchors.topMargin: 0
+                anchors.leftMargin: 0
+                horizontalAlignment: Text.AlignHCenter
+                anchors.left: parent.left
+                verticalAlignment: Text.AlignVCenter
+            }
+
+            Switch {
+                id: switch1
+                width: 86
+                text: qsTr("")
+                anchors.left: parent.left
+                anchors.leftMargin: 240
+                anchors.top: parent.top
+                anchors.topMargin: 0
+            }
+        }
+
+        Item {
+            id: item8
+            x: 12
+            y: -12
+            width: 326
+            height: 40
+            anchors.top: parent.top
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.topMargin: 246
+            Text {
+                id: text15
+                width: 155
+                height: 40
+                text: qsTr("Brak funkcji")
+                anchors.top: parent.top
+                font.pixelSize: 15
+                anchors.topMargin: 0
+                anchors.leftMargin: 85
+                horizontalAlignment: Text.AlignHCenter
+                anchors.left: parent.left
+                verticalAlignment: Text.AlignVCenter
+            }
+
+            TextField {
+                id: wart_chose
+                width: 86
+                text: qsTr("")
+                horizontalAlignment: Text.AlignHCenter
+                anchors.top: parent.top
+                anchors.topMargin: 0
+                anchors.leftMargin: 240
+                anchors.left: parent.left
+                inputMethodHints: Qt.ImhDigitsOnly
+            }
+
+            TextField {
+                id: nr_chose
+                width: 85
+                text: qsTr("6")
+                horizontalAlignment: Text.AlignHCenter
+                anchors.left: parent.left
+                anchors.leftMargin: 0
+                anchors.top: parent.top
+                anchors.topMargin: 0
+                inputMethodHints: Qt.ImhDigitsOnly
+            }
+        }
+
+        Button {
+            id: potwiedz_edycje
+            x: 113
+            text: qsTr("Potwierdź")
             anchors.top: parent.top
             anchors.topMargin: 305
-            font.pixelSize: 14
-        }
-
-        Switch {
-            id: switch1
-            text: qsTr("Wyłącz/Włącz")
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.top
-            anchors.topMargin: 315
         }
     }
 }
-
-

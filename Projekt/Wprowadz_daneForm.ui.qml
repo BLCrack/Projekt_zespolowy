@@ -3,13 +3,12 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 
 Item {
-    property alias wprowadz: wprowadz
-    property alias textField: textField
     id: wprowadz
     width: 640
     height: 480
-    property alias rysuj: rysuj
     property alias menu: menu
+    property alias potwierdz: potwierdz
+    property alias wprowadz_liczbe: wprowadz_liczbe
 
     Text {
         id: text1
@@ -17,151 +16,123 @@ Item {
         width: 320
         height: 40
         text: qsTr("Automat Komórkowy")
-        anchors.horizontalCenterOffset: 2
+        anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin: 45
-        anchors.horizontalCenter: parent.horizontalCenter
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
         font.pixelSize: 33
     }
 
-    Grid {
-        id: grid
-        x: 146
-        width: 352
-        height: 342
-        anchors.verticalCenter: parent.verticalCenter
+    Item {
+        id: item1
+        x: 162
+        width: 339
+        height: 389
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
-        anchors.topMargin: 69
-
-        RowLayout {
-            id: rowLayout1
-            width: 282
-            height: 38
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.top
-            anchors.topMargin: 160
-
-            TextField {
-                id: ilosc_danych
-                text: qsTr("")
-            }
-
-            Button {
-                id: button
-                text: qsTr("Potwierdź")
-            }
-        }
-
-        RowLayout {
-            id: rowLayout2
-            width: 282
-            height: 38
-            anchors.top: parent.top
-            anchors.topMargin: 95
-            anchors.horizontalCenter: parent.horizontalCenter
-
-            TextField {
-                id: skrypt
-                text: qsTr("")
-                inputMethodHints: Qt.ImhFormattedNumbersOnly
-            }
-
-            Button {
-                id: button1
-                text: qsTr("Potwierdź")
-            }
-        }
-
-        RowLayout {
-
-            id: rowLayout
-            width: 282
-            height: 38
-            anchors.horizontalCenterOffset: 0
-            anchors.top: parent.top
-            anchors.topMargin: 30
-            anchors.horizontalCenter: parent.horizontalCenter
-
-            TextField {
-                id: textField
-                width: 142
-                height: 38
-                text: qsTr("")
-                Layout.fillWidth: false
-                Layout.fillHeight: false
-                inputMethodHints: Qt.ImhFormattedNumbersOnly
-            }
-
-            Button {
-                id: rysuj
-                text: qsTr("Rysuj")
-                Layout.fillWidth: false
-                Layout.fillHeight: false
-            }
-        }
+        anchors.topMargin: 91
 
         Text {
             id: text2
+            x: 29
             width: 282
-            height: 38
-            text: qsTr("Wprowadź długość boku kratki:")
-            anchors.horizontalCenterOffset: 0
-            anchors.top: parent.top
-            anchors.topMargin: 0
-            anchors.horizontalCenter: parent.horizontalCenter
+            height: 30
+            text: qsTr("Wprowadź długość boku kratki")
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
-            font.pixelSize: 14
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            font.pixelSize: 15
+        }
+
+        TextField {
+            id: wprowadz_liczbe
+            x: 70
+            text: qsTr("")
+            horizontalAlignment: Text.AlignHCenter
+            anchors.top: parent.top
+            anchors.topMargin: 31
+            anchors.horizontalCenter: parent.horizontalCenter
+            inputMethodHints: Qt.ImhDigitsOnly
         }
 
         Text {
             id: text3
+            x: 140
             width: 282
-            height: 38
-            text: qsTr("Wprowadź ilość danych w vektorze:")
-            anchors.horizontalCenterOffset: 0
+            height: 30
+            text: qsTr("Wprowadź ilość danych w wektorze")
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
             anchors.top: parent.top
-            anchors.topMargin: 67
+            anchors.topMargin: 72
             anchors.horizontalCenter: parent.horizontalCenter
-            font.pixelSize: 14
+            font.pixelSize: 15
+        }
+
+        TextField {
+            id: wprowadz_ile_danych
+            x: 75
+            text: qsTr("")
+            horizontalAlignment: Text.AlignHCenter
+            anchors.top: parent.top
+            anchors.topMargin: 103
+            anchors.horizontalCenter: parent.horizontalCenter
+            inputMethodHints: Qt.ImhDigitsOnly
         }
 
         Text {
             id: text4
+            x: 146
             width: 282
-            height: 38
-            text: qsTr("Wczytaj skrypt:")
-            anchors.horizontalCenterOffset: 0
+            height: 30
+            text: qsTr("Wczytaj skrypt")
             verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
             anchors.top: parent.top
-            anchors.topMargin: 130
+            anchors.topMargin: 144
             anchors.horizontalCenter: parent.horizontalCenter
-            font.pixelSize: 14
+            font.pixelSize: 15
+        }
+
+        TextField {
+            id: wczytaj_skrypt
+            x: 91
+            text: qsTr("")
+            horizontalAlignment: Text.AlignHCenter
+            anchors.top: parent.top
+            anchors.topMargin: 175
+            anchors.horizontalCenter: parent.horizontalCenter
         }
 
         Button {
-            id: menu
-            text: qsTr("Wróć do menu")
-            anchors.horizontalCenterOffset: 0
-            anchors.horizontalCenter: parent.horizontalCenter
+            id: potwierdz
+            x: 120
+            text: qsTr("Potwierdź")
+            clip: false
             anchors.top: parent.top
-            anchors.topMargin: 300
+            anchors.topMargin: 234
+            anchors.horizontalCenter: parent.horizontalCenter
         }
 
         Button {
             id: zapisz_stan
-            text: qsTr("Zapisz stan")
+            x: 120
+            text: qsTr("Zapisz Stan")
+            anchors.top: parent.top
+            anchors.topMargin: 291
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+
+        Button {
+            id: menu
+            x: 120
+            text: qsTr("Wróć do Menu")
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
-            anchors.topMargin: 220
+            anchors.topMargin: 348
         }
     }
 }
-
-
