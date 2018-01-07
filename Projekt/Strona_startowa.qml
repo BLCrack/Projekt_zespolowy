@@ -1,6 +1,7 @@
 import QtQuick 2.4
 import QtQuick.Window 2.2
 import QtQuick.Controls 1.4
+import Qt.labs.platform 1.0
 
 Strona_startowaForm {
     rozpocznij.onClicked: {                                 //uruchomienie głównej części programu
@@ -10,13 +11,11 @@ Strona_startowaForm {
     }
 
     wczytaj.onClicked: {
-
+        start.visible=false;
+        lista.visible=true;
     }
 
     wyjscie.onClicked:{                                     //zakończenie programu
         Qt.quit();
     }
-
-
-
 }

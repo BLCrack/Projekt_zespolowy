@@ -1,6 +1,7 @@
 import QtQuick 2.4
 import QtQuick.Window 2.2
 import QtQuick.Controls 1.4
+import Qt.labs.platform 1.0
 import "automatkomorkowy.js" as Logika
 
 Wprowadz_daneForm {
@@ -9,9 +10,6 @@ Wprowadz_daneForm {
         function draw(a) {
             var x=0,y=0, size=0, font=12;                     //zmienne. Mam nadzieje że nazwy są wystarczająco jasne;
             a = parseInt(a);                                    //tutaj funkcja przekształca podany tekst na liczbę;
-
-            automatGlobal=new Logika.CellularAutomation(a);
-            automatGlobal.initialize();
 
             if(pincha.children!=null)
                 for(var k=pincha.children.length; k>0;k--)
@@ -79,7 +77,13 @@ Wprowadz_daneForm {
                                             automatGlobal.currentX='+i+'
                                             automatGlobal.currentY='+j+'
                                             edytuj.visible=true
-                                            opiskomorki.text="ID komórki: "+automatGlobal.map['+i+']['+j+'].cellularID+"\nPołożenie: kolumna:"+(automatGlobal.map['+i+']['+j+'].widthPosition+1)+", wiersz:"+(automatGlobal.map['+i+']['+j+'].heightPosition+1)+"\nColor (R: "+automatGlobal.map['+i+']['+j+'].values[0]+", G: "+automatGlobal.map['+i+']['+j+'].values[1]+", B: "+automatGlobal.map['+i+']['+j+'].values[2]+")\nIlość wartości komórki: "+automatGlobal.map['+i+']['+j+'].countOfValues+"\nWartości: "+automatGlobal.map['+i+']['+j+'].values[0]+", "+automatGlobal.map['+i+']['+j+'].values[1]+", "+automatGlobal.map['+i+']['+j+'].values[2]+", "+automatGlobal.map['+i+']['+j+'].values[3]+", "+automatGlobal.map['+i+']['+j+'].values[4]+""
+                                            var k=1, napis=automatGlobal.map['+i+']['+j+'].values[0]+", ";
+                                            while(k<automatGlobal.map['+i+']['+j+'].countOfValues && k<automatGlobal.map['+i+']['+j+'].values.length)
+                                            {
+                                                napis+=automatGlobal.map['+i+']['+j+'].values[k]+", ";
+                                                k++;
+                                            }
+                                            opiskomorki.text="ID komórki: "+automatGlobal.map['+i+']['+j+'].cellularID+"\nPołożenie: kolumna:"+(automatGlobal.map['+i+']['+j+'].widthPosition+1)+", wiersz:"+(automatGlobal.map['+i+']['+j+'].heightPosition+1)+"\nColor (R: "+automatGlobal.map['+i+']['+j+'].values[0]+", G: "+automatGlobal.map['+i+']['+j+'].values[1]+", B: "+automatGlobal.map['+i+']['+j+'].values[2]+")\nIlość wartości komórki: "+automatGlobal.map['+i+']['+j+'].countOfValues+"\nWartości: "+napis+""
                                         }
                                     }
 
@@ -91,11 +95,27 @@ Wprowadz_daneForm {
                 x=0;                                            //ustawiamy x na początek;
             }
         }
-        potwierdz.onClicked: {                                      //event opisujący kliknięcie przycisku;
-            draw(wprowadz_liczbe.text);
+
+        Component.onCompleted: {
+            if(automatGlobal!=null)
+                draw(automatGlobal.size);
         }
+
+        potwierdz.onClicked: {                                      //event opisujący kliknięcie przycisku;
+            automatGlobal=new Logika.CellularAutomation(parseInt(wprowadz_liczbe.text));
+            automatGlobal.numberOfValues=parseInt(wprowadz_ile_danych.text);
+            automatGlobal.initialize();
+            draw(automatGlobal.size);
+            skrypt=StandardPaths.writableLocation(StandardPaths.DocumentsLocation)+"/"+wczytaj_skrypt.text;
+        }
+
+        zapisz_stan.onClicked: {
+            automatGlobal.saveToFile(StandardPaths.writableLocation(StandardPaths.DocumentsLocation)+"/to.JSON",automatGlobal.map);
+        }
+
         menu.onClicked: {                                       //uruchomienie strony strtowej. Klawisz powrotu.
             okno.visible=false
+            automatGlobal=null;
             var component = Qt.createComponent("Strona_startowa.qml")
             var window    = component.createObject(apka)
         }

@@ -8,7 +8,10 @@ Item {
     height: 480
     property alias menu: menu
     property alias potwierdz: potwierdz
+    property alias zapisz_stan: zapisz_stan
     property alias wprowadz_liczbe: wprowadz_liczbe
+    property alias wczytaj_skrypt: wczytaj_skrypt
+    property alias wprowadz_ile_danych: wprowadz_ile_danych
 
     Text {
         id: text1

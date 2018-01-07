@@ -5,6 +5,7 @@ function CellularAutomation(size)
     this.map = new Array(size);
     this.currentX = null;
     this.currentY = null;
+    this.numberOfValues = null;
 
     //tablica dwuwymiarowa
     for(var i=0; i<this.size; i++)
@@ -47,51 +48,55 @@ CellularAutomation.prototype.initialize = function()
             }
             //losujemy wartosci komorek
             var tabOfValues = new Array(r,g,b,obramowanie,tekst); //randomowe wartosci rgb do dla komórki
-            this.map[height][width] = new Cellular(index, height, width,5, tabOfValues) //true or false zaleznie czy zyje czy nie
+            this.map[height][width] = new Cellular(index, height, width, this.numberOfValues, tabOfValues) //true or false zaleznie czy zyje czy nie
             index++;
         }
     }
 
 };
 
-CellularAutomation.prototype.loadFromFile = function(fileUrl)
+CellularAutomation.prototype.loadFromFile = function(fileUrl, automat)
 {
     function setElements(arr)   //funkcja ustawiajaca elementy komorki z pliku
         {
-            var edge_length = arr.length;
-            var c = new Array(edge_length);
+            //var edge_length = arr.length;
+            automat.size = arr.length;
+            automat.countOfCellulars=automat.size*automat.size;
+            //var c = new Array(edge_length);
+            automat.map=new Array(automat.size);
 
-            for(var i = 0; i < edge_length; i++)    //tablica dwuwymiarowa
+            for(var i = 0; i < automat.size; i++)    //tablica dwuwymiarowa
             {
-                c[i] = new Array(edge_length);
-                for(var j = 0; j < edge_length; j++)
+                //c[i] = new Array(edge_length);
+                automat.map[i] = new Array(automat.size);
+                for(var j = 0; j < automat.size; j++)
                 {
-                    c[i][j]= new Cellular( arr[i][j].cellularID, arr[i][j].heightPosition, arr[i][j].widthPosition, arr[i][j].countOfValues, arr[i][j].values)  //ustawianie elementow do tablicy dwuwymiarowej
+                    //c[i][j]= new Cellular( arr[i][j].cellularID, arr[i][j].heightPosition, arr[i][j].widthPosition, arr[i][j].countOfValues, arr[i][j].values)  //ustawianie elementow do tablicy dwuwymiarowej
+                    automat.map[i][j]= new Cellular( arr[i][j].cellularID, arr[i][j].heightPosition, arr[i][j].widthPosition, arr[i][j].countOfValues, arr[i][j].values)  //ustawianie elementow do tablicy dwuwymiarowej
                 }
             }
-            return c;
         }
 
         var request = new XMLHttpRequest();    				 //wczytywanie odbywa sie za pomoca XMLHttpRequest
         request.open("GET", fileUrl, false);
         request.send(null);
         var myArr = JSON.parse(request.responseText);		//parsowanie z pliku JSON
-        var object = setElements(myArr);
-        var edge_length = object.length;
+        setElements(myArr);
+        var edge_length = automat.size;
 
-        for(var i=0; i < edge_length; i++)    //wypisywanie do konsoli argumentow komorki, nie jest potrzebne do poprawnego dzialania programu
-        {
-            for(var j=0;j<edge_length;j++)
-            {
-                console.log(object[i][j].cellularID);
-                console.log(object[i][j].heightPosition);
-                console.log(object[i][j].widthPosition);
-                console.log(object[i][j].countOfValues);
-                console.log(object[i][j].values);
-            }
-        }
-        console.log('Wielkosc tablicy dwuwymiarowej:', edge_length, 'x', edge_length);
-        return object;    // zwrocenie calego obiektu automatu
+//        for(var i=0; i < edge_length; i++)    //wypisywanie do konsoli argumentow komorki, nie jest potrzebne do poprawnego dzialania programu
+//        {
+//            for(var j=0;j<edge_length;j++)
+//            {
+//                console.log(automat.map[i][j].cellularID);
+//                console.log(automat.map[i][j].heightPosition);
+//                console.log(automat.map[i][j].widthPosition);
+//                console.log(automat.map[i][j].countOfValues);
+//                console.log(automat.map[i][j].values);
+//            }
+//        }
+//        console.log('Wielkosc tablicy dwuwymiarowej:', edge_length, 'x', edge_length);
+        //automat=object;    // zwrocenie calego obiektu automatu
 };
 
 CellularAutomation.prototype.saveToFile = function(fileUrl, object)

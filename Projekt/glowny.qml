@@ -5,7 +5,7 @@ import QtQuick.Layouts 1.3
 import "skrypt.js" as Zycie
 
 Page {
-    property var automatGlobal
+    property var skrypt
     property var iteracja: 0
     property alias okno: okno
     property alias swipeView: swipeView
@@ -35,7 +35,15 @@ Page {
                 pincha.children[counter].border.width=automatGlobal.map[i][j].values[3];
                 pincha.children[counter].children[0].text=automatGlobal.map[i][j].values[4];
                 if(i==automatGlobal.currentX && j==automatGlobal.currentY)
-                    opiskomorki.text="ID komórki: "+automatGlobal.map[i][j].cellularID+"\nPołożenie: kolumna:"+(automatGlobal.map[i][j].widthPosition+1)+", wiersz:"+(automatGlobal.map[i][j].heightPosition+1)+"\nColor (R: "+automatGlobal.map[i][j].values[0]+", G: "+automatGlobal.map[i][j].values[1]+", B: "+automatGlobal.map[i][j].values[2]+")\nIlość wartości komórki: "+automatGlobal.map[i][j].countOfValues+"\nWartości: "+automatGlobal.map[i][j].values[0]+", "+automatGlobal.map[i][j].values[1]+", "+automatGlobal.map[i][j].values[2]+", "+automatGlobal.map[i][j].values[3]+", "+automatGlobal.map[i][j].values[4]+""
+                {
+                    var k=1, napis=automatGlobal.map[i][j].values[0]+", ";
+                    while(k<automatGlobal.map[i][j].countOfValues && k<automatGlobal.map[i][j].values.length)
+                    {
+                        napis+=automatGlobal.map[i][j].values[k]+", ";
+                        k++;
+                    }
+                    opiskomorki.text="ID komórki: "+automatGlobal.map[i][j].cellularID+"\nPołożenie: kolumna:"+(automatGlobal.map[i][j].widthPosition+1)+", wiersz:"+(automatGlobal.map[i][j].heightPosition+1)+"\nColor (R: "+automatGlobal.map[i][j].values[0]+", G: "+automatGlobal.map[i][j].values[1]+", B: "+automatGlobal.map[i][j].values[2]+")\nIlość wartości komórki: "+automatGlobal.map[i][j].countOfValues+"\nWartości: "+napis+""
+                }
                 counter++;
                 x+=size;
             }
@@ -46,6 +54,20 @@ Page {
     }
 onHeightChanged: updateDraw()
 onWidthChanged: updateDraw()
+
+    Timer {
+        id:time
+        interval: 500;
+        running: false;
+        repeat: true
+
+        onTriggered: {
+            automatGlobal.map=Zycie.scriptNextStep(automatGlobal);
+            iteracja++;
+            updateDraw();
+        }
+     }
+
     SwipeView {                                 //odpowiada za przesuwanie stron;
         id: swipeView
         interactive: true                      //wyłącza funkcje przesuwania strony palce;
@@ -172,22 +194,14 @@ onWidthChanged: updateDraw()
             x:Screen.width/4
             width: Screen.width/4
             height: 40
-            onClicked: {
-                var i=0;
-                while(i<5)
-                {
-                    automatGlobal.map=Zycie.scriptNextStep(automatGlobal);
-                    i++;
-                    iteracja++;
-                    updateDraw();
-                }
-            }
+            onClicked: time.start();
         }
         TabButton {
             text: qsTr("Stop")
             x:Screen.width/2
             width: Screen.width/4
             height: 40
+            onClicked: time.stop();
         }
         TabButton {
             text: qsTr("Next")
