@@ -2,11 +2,11 @@ import QtQuick 2.7
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
+import Qt.labs.platform 1.0
 import "skrypt.js" as Zycie
 
 Page {
     property var skrypt
-    property var iteracja: 0
     property alias okno: okno
     property alias swipeView: swipeView
     id: okno
@@ -65,6 +65,7 @@ onWidthChanged: updateDraw()
             automatGlobal.map=Zycie.scriptNextStep(automatGlobal);
             iteracja++;
             updateDraw();
+            automatGlobal.saveToFile(StandardPaths.writableLocation(StandardPaths./*DocumentsLocation*/HomeLocation)+"/iteracja_nr."+iteracja+".JSON",automatGlobal.map);
         }
      }
 
@@ -153,6 +154,7 @@ onWidthChanged: updateDraw()
                 pincha.visible=true;
                 stopa.visible=true;
                 tlo.visible=true;
+                updateDraw();
             }
             else{
 
@@ -171,7 +173,7 @@ onWidthChanged: updateDraw()
         TabButton {
             text: qsTr("Second")
             height: 40
-            onClicked: {pincha.visible=true;stopa.visible=true;tlo.visible=true;}
+            onClicked: {pincha.visible=true;stopa.visible=true;tlo.visible=true; updateDraw();}
         }
         TabButton {
             id:edycjakomorki
@@ -188,6 +190,14 @@ onWidthChanged: updateDraw()
             x:0
             width: Screen.width/4
             height: 40
+            onClicked: {
+                if(iteracja>0)
+                {
+                    iteracja--;
+                    automatGlobal.loadFromFile(StandardPaths.writableLocation(StandardPaths./*DocumentsLocation*/HomeLocation)+"/iteracja_nr."+iteracja+".JSON",automatGlobal);
+                    updateDraw();
+                }
+            }
         }
         TabButton {
             text: qsTr("Start")
@@ -209,9 +219,12 @@ onWidthChanged: updateDraw()
             width: Screen.width/4
             height: 40
             onClicked: {
-                automatGlobal.map=Zycie.scriptNextStep(automatGlobal);
-                iteracja++;
-                updateDraw();
+                if(iteracja<40)
+                {
+                    iteracja++;
+                    automatGlobal.loadFromFile(StandardPaths.writableLocation(StandardPaths./*DocumentsLocation*/HomeLocation)+"/iteracja_nr."+iteracja+".JSON",automatGlobal);
+                    updateDraw();
+                }
             }
         }
     }

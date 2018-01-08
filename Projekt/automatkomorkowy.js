@@ -3,8 +3,8 @@ function CellularAutomation(size)
     this.size = size;
     this.countOfCellulars = size*size;
     this.map = new Array(size);
-    this.currentX = null;
-    this.currentY = null;
+    this.currentX = -1;
+    this.currentY = -1;
     this.numberOfValues = null;
 
     //tablica dwuwymiarowa
@@ -17,8 +17,6 @@ function CellularAutomation(size)
 //NOWA GRA
 CellularAutomation.prototype.initialize = function()
 {
-    this.currentX = 0;
-    this.currentT = 0;
     //tworzenie komórek na planszy
     var index = 0;
     for(var height=0; height<this.size; height++)

@@ -15,7 +15,6 @@ Wprowadz_daneForm {
                 for(var k=pincha.children.length; k>0;k--)
                     pincha.children[k-1].destroy();
 
-            iteracja=0;
             opiskomorki.text=""
             edytuj.visible=false
             iter.text="Iteracja nr.: "+iteracja;
@@ -105,12 +104,10 @@ Wprowadz_daneForm {
             automatGlobal=new Logika.CellularAutomation(parseInt(wprowadz_liczbe.text));
             automatGlobal.numberOfValues=parseInt(wprowadz_ile_danych.text);
             automatGlobal.initialize();
+            iteracja=0;
+            automatGlobal.saveToFile(StandardPaths.writableLocation(StandardPaths./*DocumentsLocation*/HomeLocation)+"/iteracja_nr."+iteracja+".JSON",automatGlobal.map);
             draw(automatGlobal.size);
-            skrypt=StandardPaths.writableLocation(StandardPaths.DocumentsLocation)+"/"+wczytaj_skrypt.text;
-        }
-
-        zapisz_stan.onClicked: {
-            automatGlobal.saveToFile(StandardPaths.writableLocation(StandardPaths.DocumentsLocation)+"/to.JSON",automatGlobal.map);
+            skrypt=StandardPaths.writableLocation(StandardPaths./*DocumentsLocation*/HomeLocation)+"/"+wczytaj_skrypt.text;
         }
 
         menu.onClicked: {                                       //uruchomienie strony strtowej. Klawisz powrotu.

@@ -12,6 +12,7 @@ ApplicationWindow {
     property alias apka:apka
     property alias lista:lista
     property var automatGlobal
+    property var iteracja: 0
     id:apka
     visible: true
     visibility: Window.FullScreen               // uruchamia okno aplikaci w trybie FullScreen;
@@ -27,7 +28,7 @@ ApplicationWindow {
             id: folderModel
             nameFilters: ["*.JSON"]
             showDirs: false
-            folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
+            folder: StandardPaths.writableLocation(StandardPaths./*DocumentsLocation*/HomeLocation)
 
         }
         Component{
@@ -35,7 +36,11 @@ ApplicationWindow {
             Button  { text: fileName; width: Screen.width;
                       onClicked: {
                           automatGlobal=new Logika.CellularAutomation(1);
-                          automatGlobal.loadFromFile(StandardPaths.writableLocation(StandardPaths.DocumentsLocation)+"/"+fileName,automatGlobal);
+                          automatGlobal.loadFromFile(StandardPaths.writableLocation(StandardPaths./*DocumentsLocation*/HomeLocation)+"/"+fileName,automatGlobal);
+                          var text=fileName
+                          text=text.slice(12,text.length)
+                          text=text.slice(0,text.indexOf("."))
+                          iteracja=parseInt(text);
                           lista.visible=false
                           var component = Qt.createComponent("glowny.qml")
                           var window    = component.createObject(apka)

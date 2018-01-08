@@ -11,6 +11,14 @@ Item {
     width: 640
     height: 480
     property alias edycja: edycja
+    property alias potwiedz_edycje: potwiedz_edycje
+    property alias wart_czerw: wart_czerw
+    property alias wart_ziel: wart_ziel
+    property alias wart_nieb: wart_nieb
+    property alias wart_tekst: wart_tekst
+    property alias switch1: switch1
+    property alias nr_chose: nr_chose
+    property alias wart_chose: wart_chose
 
     Text {
         id: text1
