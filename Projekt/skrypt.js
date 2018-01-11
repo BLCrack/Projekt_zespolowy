@@ -46,6 +46,7 @@ function scriptNextStep(automat)	//gra o zycie
                     map_next[i][j].values[2]=0.0
                     map_next[i][j].values[3]=1.0
                     //map_next[i][j].isLive = true;
+                    //testowanie
                 }
             }
             else
