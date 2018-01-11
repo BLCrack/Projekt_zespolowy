@@ -105,9 +105,10 @@ Wprowadz_daneForm {
             automatGlobal.numberOfValues=parseInt(wprowadz_ile_danych.text);
             automatGlobal.initialize();
             iteracja=0;
-            automatGlobal.saveToFile(StandardPaths.writableLocation(StandardPaths./*DocumentsLocation*/HomeLocation)+"/iteracja_nr."+iteracja+".JSON",automatGlobal.map);
+            automatGlobal.saveToFile(StandardPaths.writableLocation(StandardPaths.DocumentsLocation/*HomeLocation*/)+"/iteracja_nr."+iteracja+".JSON",automatGlobal.map);
             draw(automatGlobal.size);
-            skrypt=StandardPaths.writableLocation(StandardPaths./*DocumentsLocation*/HomeLocation)+"/"+wczytaj_skrypt.text;
+            skrypt=StandardPaths.writableLocation(StandardPaths.DocumentsLocation/*HomeLocation*/)+"/"+wczytaj_skrypt.text;
+            swipeView.incrementCurrentIndex()
         }
 
         menu.onClicked: {                                       //uruchomienie strony strtowej. Klawisz powrotu.

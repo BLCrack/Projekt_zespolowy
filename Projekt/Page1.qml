@@ -24,5 +24,6 @@ Page1Form {
 
         if(wart_chose.length!=0 && parseInt(nr_chose)>5 && automatGlobal.map[x][y].countOfValues>=parseInt(nr_chose) && automatGlobal.map[x][y].values.length>parseInt(nr_chose))
             automatGlobal.map[x][y].values[parseInt(nr_chose)-1]=parseFloat(wart_chose.text);
+        swipeView.decrementCurrentIndex();
     }
 }

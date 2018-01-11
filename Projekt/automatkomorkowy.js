@@ -32,17 +32,17 @@ CellularAutomation.prototype.initialize = function()
             {
                 isLive = false; //nie zywa
                 r=255.0;
-                g=0.0;
-                b=0.0;
-                obramowanie = 0.0;
+                g=255.0;
+                b=255.0;
+                obramowanie = 1.0;
             }
             else
             {
                 isLive = true; //zywa
                 r = 0.0;
-                g = 255.0;
+                g = 0.0;
                 b = 0.0;
-                obramowanie = 1.0;
+                obramowanie = 0.0;
             }
             //losujemy wartosci komorek
             var tabOfValues = new Array(r,g,b,obramowanie,tekst); //randomowe wartosci rgb do dla komórki
