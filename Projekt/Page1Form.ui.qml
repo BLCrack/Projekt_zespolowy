@@ -10,15 +10,22 @@ Item {
     id: edycja
     width: 640
     height: 480
+    property alias index_bez_funkcji: index_bez_funkcji
     property alias edycja: edycja
     property alias potwiedz_edycje: potwiedz_edycje
+    property alias aktualizuj: aktualizuj
     property alias wart_czerw: wart_czerw
     property alias wart_ziel: wart_ziel
     property alias wart_nieb: wart_nieb
     property alias wart_tekst: wart_tekst
     property alias switch1: switch1
-    property alias nr_chose: nr_chose
     property alias wart_chose: wart_chose
+    property alias index_czerwony: index_czerwony
+    property alias index_zielony: index_zielony
+    property alias index_niebieski: index_niebieski
+    property alias index_tekst: index_tekst
+    property alias index_obramowanie: index_obramowanie
+
 
     Text {
         id: text1
@@ -71,7 +78,7 @@ Item {
                 id: text2
                 width: 85
                 height: 40
-                text: qsTr("Nr wartości")
+                text: qsTr("ID wartości")
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
                 anchors.left: parent.left
@@ -85,7 +92,7 @@ Item {
                 id: text6
                 width: 86
                 height: 40
-                text: qsTr("Zmień")
+                text: qsTr("Wartosc")
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
                 anchors.left: parent.left
@@ -120,20 +127,6 @@ Item {
                 verticalAlignment: Text.AlignVCenter
             }
 
-            Text {
-                id: text5
-                width: 85
-                height: 40
-                text: qsTr("1")
-                anchors.top: parent.top
-                font.pixelSize: 16
-                anchors.topMargin: 0
-                anchors.leftMargin: 0
-                horizontalAlignment: Text.AlignHCenter
-                anchors.left: parent.left
-                verticalAlignment: Text.AlignVCenter
-            }
-
             TextField {
                 id: wart_czerw
                 x: 250
@@ -144,6 +137,18 @@ Item {
                 anchors.topMargin: 0
                 anchors.leftMargin: 240
                 anchors.left: parent.left
+                inputMethodHints: Qt.ImhDigitsOnly
+            }
+
+            TextField {
+                id: index_czerwony
+                width: 85
+                text: qsTr("1")
+                anchors.left: parent.left
+                anchors.leftMargin: 0
+                anchors.top: parent.top
+                anchors.topMargin: 0
+                horizontalAlignment: Text.AlignHCenter
                 inputMethodHints: Qt.ImhDigitsOnly
             }
         }
@@ -171,20 +176,6 @@ Item {
                 verticalAlignment: Text.AlignVCenter
             }
 
-            Text {
-                id: text8
-                width: 85
-                height: 40
-                text: qsTr("2")
-                anchors.top: parent.top
-                anchors.topMargin: 0
-                font.pixelSize: 16
-                horizontalAlignment: Text.AlignHCenter
-                anchors.leftMargin: 0
-                anchors.left: parent.left
-                verticalAlignment: Text.AlignVCenter
-            }
-
             TextField {
                 id: wart_ziel
                 width: 86
@@ -194,6 +185,18 @@ Item {
                 anchors.topMargin: 0
                 anchors.leftMargin: 240
                 anchors.left: parent.left
+                inputMethodHints: Qt.ImhDigitsOnly
+            }
+
+            TextField {
+                id: index_zielony
+                width: 85
+                text: qsTr("2")
+                horizontalAlignment: Text.AlignHCenter
+                anchors.left: parent.left
+                anchors.leftMargin: 0
+                anchors.top: parent.top
+                anchors.topMargin: 0
                 inputMethodHints: Qt.ImhDigitsOnly
             }
         }
@@ -221,20 +224,6 @@ Item {
                 verticalAlignment: Text.AlignVCenter
             }
 
-            Text {
-                id: text10
-                width: 85
-                height: 40
-                text: qsTr("3")
-                anchors.top: parent.top
-                font.pixelSize: 16
-                anchors.topMargin: 0
-                anchors.leftMargin: 0
-                horizontalAlignment: Text.AlignHCenter
-                anchors.left: parent.left
-                verticalAlignment: Text.AlignVCenter
-            }
-
             TextField {
                 id: wart_nieb
                 width: 86
@@ -244,6 +233,18 @@ Item {
                 anchors.topMargin: 0
                 anchors.leftMargin: 240
                 anchors.left: parent.left
+                inputMethodHints: Qt.ImhDigitsOnly
+            }
+
+            TextField {
+                id: index_niebieski
+                width: 85
+                text: qsTr("3")
+                anchors.left: parent.left
+                anchors.leftMargin: 0
+                anchors.top: parent.top
+                anchors.topMargin: 0
+                horizontalAlignment: Text.AlignHCenter
                 inputMethodHints: Qt.ImhDigitsOnly
             }
         }
@@ -263,24 +264,10 @@ Item {
                 height: 40
                 text: qsTr("Wyświetlany tekst")
                 anchors.top: parent.top
-                anchors.topMargin: 0
+                anchors.topMargin: 41
                 font.pixelSize: 15
                 horizontalAlignment: Text.AlignHCenter
-                anchors.leftMargin: 85
-                anchors.left: parent.left
-                verticalAlignment: Text.AlignVCenter
-            }
-
-            Text {
-                id: text12
-                width: 85
-                height: 40
-                text: qsTr("4")
-                anchors.top: parent.top
-                anchors.topMargin: 0
-                font.pixelSize: 16
-                horizontalAlignment: Text.AlignHCenter
-                anchors.leftMargin: 0
+                anchors.leftMargin: 86
                 anchors.left: parent.left
                 verticalAlignment: Text.AlignVCenter
             }
@@ -291,9 +278,21 @@ Item {
                 text: qsTr("")
                 horizontalAlignment: Text.AlignHCenter
                 anchors.top: parent.top
-                anchors.topMargin: 0
+                anchors.topMargin: 41
                 anchors.leftMargin: 240
                 anchors.left: parent.left
+            }
+
+            TextField {
+                id: index_tekst
+                width: 85
+                text: qsTr("5")
+                horizontalAlignment: Text.AlignHCenter
+                anchors.left: parent.left
+                anchors.leftMargin: 0
+                anchors.top: parent.top
+                anchors.topMargin: 41
+                inputMethodHints: Qt.ImhDigitsOnly
             }
         }
 
@@ -313,22 +312,8 @@ Item {
                 text: qsTr("Obramowanie")
                 anchors.top: parent.top
                 font.pixelSize: 15
-                anchors.topMargin: 0
-                anchors.leftMargin: 85
-                horizontalAlignment: Text.AlignHCenter
-                anchors.left: parent.left
-                verticalAlignment: Text.AlignVCenter
-            }
-
-            Text {
-                id: text14
-                width: 85
-                height: 40
-                text: qsTr("5")
-                anchors.top: parent.top
-                font.pixelSize: 16
-                anchors.topMargin: 0
-                anchors.leftMargin: 0
+                anchors.topMargin: -40
+                anchors.leftMargin: 86
                 horizontalAlignment: Text.AlignHCenter
                 anchors.left: parent.left
                 verticalAlignment: Text.AlignVCenter
@@ -341,7 +326,19 @@ Item {
                 anchors.left: parent.left
                 anchors.leftMargin: 240
                 anchors.top: parent.top
-                anchors.topMargin: 0
+                anchors.topMargin: -40
+            }
+
+            TextField {
+                id: index_obramowanie
+                width: 85
+                text: qsTr("4")
+                anchors.left: parent.left
+                anchors.leftMargin: 0
+                anchors.top: parent.top
+                anchors.topMargin: -40
+                horizontalAlignment: Text.AlignHCenter
+                inputMethodHints: Qt.ImhDigitsOnly
             }
         }
 
@@ -381,7 +378,7 @@ Item {
             }
 
             TextField {
-                id: nr_chose
+                id: index_bez_funkcji
                 width: 85
                 text: qsTr("6")
                 horizontalAlignment: Text.AlignHCenter
@@ -398,8 +395,17 @@ Item {
             x: 113
             text: qsTr("Potwierdź")
             anchors.top: parent.top
-            anchors.topMargin: 305
+            anchors.topMargin: 355
             anchors.horizontalCenter: parent.horizontalCenter
+        }
+
+        Button {
+            id: aktualizuj
+            x: 113
+            text: qsTr("Aktualizuj")
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: parent.top
+            anchors.topMargin: 305
         }
     }
 }

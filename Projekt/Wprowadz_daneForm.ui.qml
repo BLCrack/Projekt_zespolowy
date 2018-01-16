@@ -8,7 +8,6 @@ Item {
     height: 480
     property alias menu: menu
     property alias potwierdz: potwierdz
-    property alias zapisz_stan: zapisz_stan
     property alias wprowadz_liczbe: wprowadz_liczbe
     property alias wczytaj_skrypt: wczytaj_skrypt
     property alias wprowadz_ile_danych: wprowadz_ile_danych
@@ -121,21 +120,13 @@ Item {
         }
 
         Button {
-            id: zapisz_stan
-            x: 120
-            text: qsTr("Zapisz Stan")
-            anchors.top: parent.top
-            anchors.topMargin: 291
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
-
-        Button {
             id: menu
             x: 120
             text: qsTr("Wróć do Menu")
+            anchors.horizontalCenterOffset: 0
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
-            anchors.topMargin: 348
+            anchors.topMargin: 287
         }
     }
 }

@@ -76,13 +76,14 @@ Wprowadz_daneForm {
                                             automatGlobal.currentX='+i+'
                                             automatGlobal.currentY='+j+'
                                             edytuj.visible=true
+                                            var R=automatGlobal.map['+i+']['+j+'].actuallR, G=automatGlobal.map['+i+']['+j+'].actuallG, B=automatGlobal.map['+i+']['+j+'].actuallB;
                                             var k=1, napis=automatGlobal.map['+i+']['+j+'].values[0]+", ";
                                             while(k<automatGlobal.map['+i+']['+j+'].countOfValues && k<automatGlobal.map['+i+']['+j+'].values.length)
                                             {
                                                 napis+=automatGlobal.map['+i+']['+j+'].values[k]+", ";
                                                 k++;
                                             }
-                                            opiskomorki.text="ID komórki: "+automatGlobal.map['+i+']['+j+'].cellularID+"\nPołożenie: kolumna:"+(automatGlobal.map['+i+']['+j+'].widthPosition+1)+", wiersz:"+(automatGlobal.map['+i+']['+j+'].heightPosition+1)+"\nColor (R: "+automatGlobal.map['+i+']['+j+'].values[0]+", G: "+automatGlobal.map['+i+']['+j+'].values[1]+", B: "+automatGlobal.map['+i+']['+j+'].values[2]+")\nIlość wartości komórki: "+automatGlobal.map['+i+']['+j+'].countOfValues+"\nWartości: "+napis+""
+                                            opiskomorki.text="ID komórki: "+automatGlobal.map['+i+']['+j+'].cellularID+"\nPołożenie: kolumna:"+(automatGlobal.map['+i+']['+j+'].widthPosition+1)+", wiersz:"+(automatGlobal.map['+i+']['+j+'].heightPosition+1)+"\nColor (R: "+automatGlobal.map['+i+']['+j+'].values[R]+", G: "+automatGlobal.map['+i+']['+j+'].values[G]+", B: "+automatGlobal.map['+i+']['+j+'].values[B]+")\nIlość wartości komórki: "+automatGlobal.map['+i+']['+j+'].countOfValues+"\nWartości: "+napis+""
                                         }
                                     }
 
@@ -96,8 +97,10 @@ Wprowadz_daneForm {
         }
 
         Component.onCompleted: {
-            if(automatGlobal!=null)
+            if(automatGlobal!=null){
                 draw(automatGlobal.size);
+                swipeView.incrementCurrentIndex()
+            }
         }
 
         potwierdz.onClicked: {                                      //event opisujący kliknięcie przycisku;
@@ -105,9 +108,9 @@ Wprowadz_daneForm {
             automatGlobal.numberOfValues=parseInt(wprowadz_ile_danych.text);
             automatGlobal.initialize();
             iteracja=0;
-            automatGlobal.saveToFile(StandardPaths.writableLocation(StandardPaths.DocumentsLocation/*HomeLocation*/)+"/iteracja_nr."+iteracja+".JSON",automatGlobal.map);
+            automatGlobal.saveToFile(StandardPaths.writableLocation(StandardPaths./*DocumentsLocation*/HomeLocation)+"/iteracja_nr."+iteracja+".JSON",automatGlobal.map);
             draw(automatGlobal.size);
-            skrypt=StandardPaths.writableLocation(StandardPaths.DocumentsLocation/*HomeLocation*/)+"/"+wczytaj_skrypt.text;
+            //skrypt=StandardPaths.writableLocation(StandardPaths.DocumentsLocation/*HomeLocation*/)+"/"+wczytaj_skrypt.text;
             swipeView.incrementCurrentIndex()
         }
 

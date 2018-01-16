@@ -27,13 +27,14 @@ Page {
         tlo.height=Screen.height-size*automatGlobal.size;
         for(var i=0; i<automatGlobal.size; i++){
             for(var j=0; j<automatGlobal.size; j++){
+                var R=automatGlobal.map[i][j].actuallR, G=automatGlobal.map[i][j].actuallG, B=automatGlobal.map[i][j].actuallB, Text=automatGlobal.map[i][j].actuallText, Frame=automatGlobal.map[i][j].actuallFrame;
                 pincha.children[counter].x=x;
                 pincha.children[counter].y=y;
                 pincha.children[counter].width=size;
                 pincha.children[counter].height=size;
-                pincha.children[counter].color=Qt.rgba(automatGlobal.map[i][j].values[0],automatGlobal.map[i][j].values[1],automatGlobal.map[i][j].values[2]);
-                pincha.children[counter].border.width=automatGlobal.map[i][j].values[3];
-                pincha.children[counter].children[0].text=automatGlobal.map[i][j].values[4];
+                pincha.children[counter].color=Qt.rgba(automatGlobal.map[i][j].values[R],automatGlobal.map[i][j].values[G],automatGlobal.map[i][j].values[B]);
+                pincha.children[counter].border.width=automatGlobal.map[i][j].values[Frame];
+                pincha.children[counter].children[0].text=automatGlobal.map[i][j].values[Text];
                 if(i==automatGlobal.currentX && j==automatGlobal.currentY)
                 {
                     var k=1, napis=automatGlobal.map[i][j].values[0]+", ";
@@ -42,7 +43,7 @@ Page {
                         napis+=automatGlobal.map[i][j].values[k]+", ";
                         k++;
                     }
-                    opiskomorki.text="ID komórki: "+automatGlobal.map[i][j].cellularID+"\nPołożenie: kolumna:"+(automatGlobal.map[i][j].widthPosition+1)+", wiersz:"+(automatGlobal.map[i][j].heightPosition+1)+"\nColor (R: "+automatGlobal.map[i][j].values[0]+", G: "+automatGlobal.map[i][j].values[1]+", B: "+automatGlobal.map[i][j].values[2]+")\nIlość wartości komórki: "+automatGlobal.map[i][j].countOfValues+"\nWartości: "+napis+""
+                    opiskomorki.text="ID komórki: "+automatGlobal.map[i][j].cellularID+"\nPołożenie: kolumna:"+(automatGlobal.map[i][j].widthPosition+1)+", wiersz:"+(automatGlobal.map[i][j].heightPosition+1)+"\nColor (R: "+automatGlobal.map[i][j].values[R]+", G: "+automatGlobal.map[i][j].values[G]+", B: "+automatGlobal.map[i][j].values[B]+")\nIlość wartości komórki: "+automatGlobal.map[i][j].countOfValues+"\nWartości: "+napis+""
                 }
                 counter++;
                 x+=size;
@@ -57,7 +58,7 @@ onWidthChanged: updateDraw()
 
     Timer {
         id:time
-        interval: 500;
+        interval: 1000;
         running: false;
         repeat: true
 

@@ -7,6 +7,7 @@ function CellularAutomation(size)
     this.currentY = -1;
     this.numberOfValues = null;
 
+
     //tablica dwuwymiarowa
     for(var i=0; i<this.size; i++)
     {
@@ -30,7 +31,7 @@ CellularAutomation.prototype.initialize = function()
             var tekst = "";
             if(rand<5)
             {
-                isLive = false; //nie zywa
+                //nie zywa
                 r=255.0;
                 g=255.0;
                 b=255.0;
@@ -38,7 +39,7 @@ CellularAutomation.prototype.initialize = function()
             }
             else
             {
-                isLive = true; //zywa
+                //zywa
                 r = 0.0;
                 g = 0.0;
                 b = 0.0;
@@ -57,19 +58,15 @@ CellularAutomation.prototype.loadFromFile = function(fileUrl, automat)
 {
     function setElements(arr)   //funkcja ustawiajaca elementy komorki z pliku
         {
-            //var edge_length = arr.length;
             automat.size = arr.length;
             automat.countOfCellulars=automat.size*automat.size;
-            //var c = new Array(edge_length);
             automat.map=new Array(automat.size);
 
             for(var i = 0; i < automat.size; i++)    //tablica dwuwymiarowa
             {
-                //c[i] = new Array(edge_length);
                 automat.map[i] = new Array(automat.size);
                 for(var j = 0; j < automat.size; j++)
                 {
-                    //c[i][j]= new Cellular( arr[i][j].cellularID, arr[i][j].heightPosition, arr[i][j].widthPosition, arr[i][j].countOfValues, arr[i][j].values)  //ustawianie elementow do tablicy dwuwymiarowej
                     automat.map[i][j]= new Cellular( arr[i][j].cellularID, arr[i][j].heightPosition, arr[i][j].widthPosition, arr[i][j].countOfValues, arr[i][j].values)  //ustawianie elementow do tablicy dwuwymiarowej
                 }
             }
@@ -81,20 +78,6 @@ CellularAutomation.prototype.loadFromFile = function(fileUrl, automat)
         var myArr = JSON.parse(request.responseText);		//parsowanie z pliku JSON
         setElements(myArr);
         var edge_length = automat.size;
-
-//        for(var i=0; i < edge_length; i++)    //wypisywanie do konsoli argumentow komorki, nie jest potrzebne do poprawnego dzialania programu
-//        {
-//            for(var j=0;j<edge_length;j++)
-//            {
-//                console.log(automat.map[i][j].cellularID);
-//                console.log(automat.map[i][j].heightPosition);
-//                console.log(automat.map[i][j].widthPosition);
-//                console.log(automat.map[i][j].countOfValues);
-//                console.log(automat.map[i][j].values);
-//            }
-//        }
-//        console.log('Wielkosc tablicy dwuwymiarowej:', edge_length, 'x', edge_length);
-        //automat=object;    // zwrocenie calego obiektu automatu
 };
 
 CellularAutomation.prototype.saveToFile = function(fileUrl, object)
@@ -114,4 +97,9 @@ function Cellular(ID, heightPosition, widthPosition, countOfValues, values)
     this.countOfValues = countOfValues;
     this.values = new Array(countOfValues);
     this.values = values;
+    this.actuallR = 0;
+    this.actuallG = 1;
+    this.actuallB = 2;
+    this.actuallFrame = 3;
+    this.actuallText = 4;
 }
