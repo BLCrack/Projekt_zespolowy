@@ -4,16 +4,16 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.2
 import Qt.labs.platform 1.0
 
-Item{
-     property alias rozpocznij: rozpocznij
-     property alias wczytaj: wczytaj
-     property alias wyjscie: wyjscie
-     property alias start:start
-     anchors.fill: parent
-     visible: true
-     id: start
-     width: 640
-     height: 480
+Item {
+    property alias rozpocznij: rozpocznij                                  //alias do Button o id:rozpocznij
+    property alias wczytaj: wczytaj                                        //alias do Button o id:wczytaj
+    property alias wyjscie: wyjscie                                        //alias do Button o id:wyjscie
+    property alias start:start                                             //alias do Item o id:start
+    anchors.fill: parent
+    visible: true
+    id: start
+    width: 640
+    height: 480
 
     Text {
         id: text1

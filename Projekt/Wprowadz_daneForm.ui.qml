@@ -3,14 +3,14 @@ import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 
 Item {
+    property alias menu: menu                                               //alias do Button o id:menu
+    property alias potwierdz: potwierdz                                     //alias do Button o id:potwierdz
+    property alias wprowadz_liczbe: wprowadz_liczbe                         //alias do TextField o id:wprowadz_liczbe
+    property alias wczytaj_skrypt: wczytaj_skrypt                           //alias do TextField o id:wczytaj_skrypt
+    property alias wprowadz_ile_danych: wprowadz_ile_danych                 //alias do TextField o id:wprowadz_ile_danych
     id: wprowadz
     width: 640
     height: 480
-    property alias menu: menu
-    property alias potwierdz: potwierdz
-    property alias wprowadz_liczbe: wprowadz_liczbe
-    property alias wczytaj_skrypt: wczytaj_skrypt
-    property alias wprowadz_ile_danych: wprowadz_ile_danych
 
     Text {
         id: text1

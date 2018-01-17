@@ -3,29 +3,25 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
 import QtQuick.Window 2.2
 
-
 Item {
-    //anchors.fill: parent
-    //visible: true
+    property alias index_bez_funkcji: index_bez_funkcji                     //alias do TextField o id: index_bez_funkcji
+    property alias edycja: edycja                                           //alias do Item o id: edycja
+    property alias potwiedz_edycje: potwiedz_edycje                         //alias do Button o id: potwiedz_edycje
+    property alias aktualizuj: aktualizuj                                   //alias do Button o id: aktualizuj
+    property alias wart_czerw: wart_czerw                                   //alias do TextField o id: wart_czerw
+    property alias wart_ziel: wart_ziel                                     //alias do TextField o id: wart_ziel
+    property alias wart_nieb: wart_nieb                                     //alias do TextField o id: wart_nieb
+    property alias wart_tekst: wart_tekst                                   //alias do TextField o id: wart_tekst
+    property alias switch1: switch1                                         //alias do Switch o id: switch1
+    property alias wart_chose: wart_chose                                   //alias do TextField o id: wart_chose
+    property alias index_czerwony: index_czerwony                           //alias do TextField o id: index_czerwony
+    property alias index_zielony: index_zielony                             //alias do TextField o id: index_zielony
+    property alias index_niebieski: index_niebieski                         //alias do TextField o id: index_niebieski
+    property alias index_tekst: index_tekst                                 //alias do TextField o id: index_tekst
+    property alias index_obramowanie: index_obramowanie                     //alias do TextField o id: index_obramowanie
     id: edycja
     width: 640
     height: 480
-    property alias index_bez_funkcji: index_bez_funkcji
-    property alias edycja: edycja
-    property alias potwiedz_edycje: potwiedz_edycje
-    property alias aktualizuj: aktualizuj
-    property alias wart_czerw: wart_czerw
-    property alias wart_ziel: wart_ziel
-    property alias wart_nieb: wart_nieb
-    property alias wart_tekst: wart_tekst
-    property alias switch1: switch1
-    property alias wart_chose: wart_chose
-    property alias index_czerwony: index_czerwony
-    property alias index_zielony: index_zielony
-    property alias index_niebieski: index_niebieski
-    property alias index_tekst: index_tekst
-    property alias index_obramowanie: index_obramowanie
-
 
     Text {
         id: text1
@@ -113,6 +109,7 @@ Item {
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.topMargin: 41
+
             Text {
                 id: text4
                 width: 155
@@ -162,6 +159,7 @@ Item {
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.topMargin: 82
+
             Text {
                 id: text7
                 width: 155
@@ -210,6 +208,7 @@ Item {
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.topMargin: 123
+
             Text {
                 id: text9
                 width: 155
@@ -258,6 +257,7 @@ Item {
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.topMargin: 164
+
             Text {
                 id: text11
                 width: 155
@@ -305,6 +305,7 @@ Item {
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.topMargin: 205
+
             Text {
                 id: text13
                 width: 155
@@ -351,6 +352,7 @@ Item {
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.topMargin: 246
+
             Text {
                 id: text15
                 width: 155
