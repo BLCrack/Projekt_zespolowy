@@ -39,14 +39,15 @@ ApplicationWindow {
                 width: Screen.width
                 onClicked: {
                     automatGlobal=new Logika.CellularAutomation(1);
-                    automatGlobal.loadFromFile(StandardPaths.writableLocation(StandardPaths.DownloadLocation)+"/"+fileName,automatGlobal);
-                    var text=fileName;
-                    text=text.slice(12,text.length);
-                    text=text.slice(0,text.indexOf("."));
-                    iteracja=parseInt(text);
-                    lista.visible=false;
-                    var component = Qt.createComponent("glowny.qml");
-                    var window    = component.createObject(apka);
+                    if(automatGlobal.loadFromFile(StandardPaths.writableLocation(StandardPaths.DownloadLocation)+"/"+fileName,automatGlobal)){
+                        var text=fileName;
+                        text=text.slice(12,text.length);
+                        text=text.slice(0,text.indexOf("."));
+                        iteracja=parseInt(text);
+                        lista.visible=false;
+                        var component = Qt.createComponent("glowny.qml");
+                        var window    = component.createObject(apka);
+                    }
                 }
             }
         }

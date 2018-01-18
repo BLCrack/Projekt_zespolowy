@@ -34,7 +34,7 @@ Page {
                 pincha.children[counter].y=y;
                 pincha.children[counter].width=size;
                 pincha.children[counter].height=size;
-                pincha.children[counter].color=Qt.rgba(automatGlobal.map[i][j].values[R],automatGlobal.map[i][j].values[G],automatGlobal.map[i][j].values[B]);
+                pincha.children[counter].color=Qt.rgba(automatGlobal.map[i][j].values[R]/255,automatGlobal.map[i][j].values[G]/255,automatGlobal.map[i][j].values[B]/255);
                 pincha.children[counter].border.width=automatGlobal.map[i][j].values[Frame];
                 pincha.children[counter].children[0].text=automatGlobal.map[i][j].values[Text];
                 if(i==automatGlobal.currentX && j==automatGlobal.currentY)
@@ -177,20 +177,20 @@ onWidthChanged: updateDraw()
 
         //przyciski odpowiedzialne za przesuwanie się po stronach oraz ustawianie widoczności obiektów na stronach po kliknięciu;
         TabButton {
-            text: qsTr("First")
+            text: qsTr("Ustawienia")
             height: 40
             onClicked: {flick.returnToBounds();pincha.visible=false;stopa.visible=false;tlo.visible=false;}
         }
 
         TabButton {
-            text: qsTr("Second")
+            text: qsTr("Siatka")
             height: 40
             onClicked: {pincha.visible=true;stopa.visible=true;tlo.visible=true; updateDraw();}
         }
 
         TabButton {
             id:edycjakomorki
-            text: qsTr("Third")
+            text: qsTr("Edycja")
             height: 40
             onClicked: {flick.returnToBounds();pincha.visible=false;stopa.visible=false;tlo.visible=false;}
         }
@@ -206,8 +206,7 @@ onWidthChanged: updateDraw()
             width: Screen.width/4
             height: 40
             onClicked: {
-                if(iteracja>0)
-                {
+                if(automatGlobal.loadFromFile(StandardPaths.writableLocation(StandardPaths.DownloadLocation)+"/iteracja_nr."+(iteracja-1)+".JSON",automatGlobal)){
                     iteracja--;
                     automatGlobal.loadFromFile(StandardPaths.writableLocation(StandardPaths.DownloadLocation)+"/iteracja_nr."+iteracja+".JSON",automatGlobal);
                     updateDraw();
@@ -241,8 +240,7 @@ onWidthChanged: updateDraw()
             width: Screen.width/4
             height: 40
             onClicked: {
-                if(iteracja<40)
-                {
+                if(automatGlobal.loadFromFile(StandardPaths.writableLocation(StandardPaths.DownloadLocation)+"/iteracja_nr."+(iteracja+1)+".JSON",automatGlobal)){
                     iteracja++;
                     automatGlobal.loadFromFile(StandardPaths.writableLocation(StandardPaths.DownloadLocation)+"/iteracja_nr."+iteracja+".JSON",automatGlobal);
                     updateDraw();

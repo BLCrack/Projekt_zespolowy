@@ -2,6 +2,7 @@ import QtQuick 2.4
 import QtQuick.Window 2.2
 import QtQuick.Controls 1.4
 import Qt.labs.platform 1.0
+import Usuniecie 1.0
 import "automatkomorkowy.js" as Logika
 
 Wprowadz_daneForm {
@@ -63,7 +64,7 @@ Wprowadz_daneForm {
                                     width: '+size+'
                                     height: '+size+'
                                     border.width: '+automatGlobal.map[i][j].values[3]+'
-                                    color: Qt.rgba('+automatGlobal.map[i][j].values[0]+','+automatGlobal.map[i][j].values[1]+','+automatGlobal.map[i][j].values[2]+')
+                                    color: Qt.rgba('+automatGlobal.map[i][j].values[0]/255+','+automatGlobal.map[i][j].values[1]/255+','+automatGlobal.map[i][j].values[2]/255+')
                                     Text {
                                         id: znak
                                         text: "'+automatGlobal.map[i][j].values[4]+'"
@@ -102,16 +103,21 @@ Wprowadz_daneForm {
             }
         }
 
+        MyObject{
+            id:myobject                                                     //obiekt do usuwania zapisanych iteracji automatu;
+        }
+
         potwierdz.onClicked: {                                              //po kliknięcie przycisku Potwierdz zostaje zainicjalizowany automatGlobal oraz wyswietlony;
             automatGlobal=new Logika.CellularAutomation(parseInt(wprowadz_liczbe.text));
             automatGlobal.numberOfValues=parseInt(wprowadz_ile_danych.text);
             automatGlobal.initialize();
             iteracja=0;
+            myobject.usun();
             automatGlobal.saveToFile(StandardPaths.writableLocation(StandardPaths.DownloadLocation)+"/iteracja_nr."+iteracja+".JSON",automatGlobal.map);
             draw(automatGlobal.size);
             if(wczytaj_skrypt.length!=0)
-                skrypt_url=StandardPaths.writableLocation(StandardPaths.DownloadLocation)+"/"+wczytaj_skrypt.text
-            swipeView.incrementCurrentIndex()
+                skrypt_url=StandardPaths.writableLocation(StandardPaths.DownloadLocation)+"/"+wczytaj_skrypt.text;
+            swipeView.incrementCurrentIndex();
         }
 
         menu.onClicked: {                                                   //powrut do strony startowej;

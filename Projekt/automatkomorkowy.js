@@ -72,8 +72,11 @@ CellularAutomation.prototype.loadFromFile = function(fileUrl, automat){
     var request = new XMLHttpRequest();    				 //wczytywanie odbywa sie za pomoca XMLHttpRequest
     request.open("GET", fileUrl, false);
     request.send(null);
+    if(request.status!=200)
+        return false;
     var myArr = JSON.parse(request.responseText);		//parsowanie z pliku JSON
     setElements(myArr);
+    return true;
 };
 
 //funkcja zapisująca wygląd siatki do pliku. Parametry to pełen adres URL do plik i siatka w postaci map. Zwraca informację o tym czy udało się zapisać plik.

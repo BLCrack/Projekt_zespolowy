@@ -15,20 +15,20 @@ Page1Form {
 
         //zmienne odpowiadają za numer wartości odpowiedzialnej za daną rzecz w automacie; R - kolor czerwony; G - kolor zielony; B - kolor niebiesk; Text - wyświetlany tekst; Frame - obramowanie; Next - wartość bez funkcji;
         var R = automatGlobal.map[x][y].actuallR,G = automatGlobal.map[x][y].actuallG,B = automatGlobal.map[x][y].actuallB,Text = automatGlobal.map[x][y].actuallText,Frame = automatGlobal.map[x][y].actuallFrame, Next = parseInt(index_bez_funkcji.text)-1;
-        if(wart_czerw.length!=0 && automatGlobal.map[x][y].countOfValues>=1)//zmiana wartości w automatGlobal;
+        if(wart_czerw.length!=0 && automatGlobal.map[x][y].countOfValues>=parseInt(index_czerwony.text))//zmiana wartości w automatGlobal;
             automatGlobal.map[x][y].values[R]=parseFloat(wart_czerw.text);
-        if(wart_ziel.length!=0 && automatGlobal.map[x][y].countOfValues>=2)
+        if(wart_ziel.length!=0 && automatGlobal.map[x][y].countOfValues>=parseInt(index_zielony.text))
             automatGlobal.map[x][y].values[G]=parseFloat(wart_ziel.text);
-        if(wart_nieb.length!=0 && automatGlobal.map[x][y].countOfValues>=3)
+        if(wart_nieb.length!=0 && automatGlobal.map[x][y].countOfValues>=parseInt(index_niebieski.text))
             automatGlobal.map[x][y].values[B]=parseFloat(wart_nieb.text);
-        if(automatGlobal.map[x][y].countOfValues>=4)
+        if(automatGlobal.map[x][y].countOfValues>=parseInt(index_obramowanie.text))
         {
             if(switch1.checked)
                 automatGlobal.map[x][y].values[Frame]=1.0;
             else
                 automatGlobal.map[x][y].values[Frame]=0.0;
         }
-        if(wart_tekst.length!=0 && automatGlobal.map[x][y].countOfValues>=5)
+        if(wart_tekst.length!=0 && automatGlobal.map[x][y].countOfValues>=parseInt(index_tekst.text))
             automatGlobal.map[x][y].values[Text]=wart_tekst.text;
         if(wart_chose.length!=0 && automatGlobal.map[x][y].countOfValues>=parseInt(index_bez_funkcji.text))
             automatGlobal.map[x][y].values[Next]=parseFloat(wart_chose.text);
